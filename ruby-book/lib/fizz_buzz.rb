@@ -21,9 +21,3 @@ class FizzBuzzTest < Minitest::Test
     assert_equal 'FizzBuzz', fizz_buzz(15)
   end
 end
-
-# n = 1
-# while n <= 100 do
-#   puts fizz_buzz(n)
-#   n += 1
-# end
