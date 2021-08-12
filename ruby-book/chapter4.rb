@@ -62,4 +62,12 @@ puts numbers
 # 4.7.1 さまざまな要素の取得方法 ---
 a = [1,2,3,4,5]
 puts a[1,3]
+puts ""
 puts a.values_at(0,2,4)
+puts a[a.size - 1]
+puts ""
+puts a.last
+puts a.last(2)
+puts
+puts a.first
+puts a.first(2)
