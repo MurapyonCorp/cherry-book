@@ -75,4 +75,20 @@ puts
 
 # 4.7.2 様々な要素の変更方法 ---
 
+a = [1,2,3]
+a[-3] = -10
+puts a[-3]
+a = [1,2,3,4,5]
+a[1,3] = 100
+puts a
+a = []
+a.push(1)
+a.push(2,3)
+puts a
+puts
+a = [1,2,3,1,2,3]
+a.delete(2)
+puts a
+a.delete(5)
+
 puts
