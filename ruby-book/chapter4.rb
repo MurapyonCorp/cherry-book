@@ -92,3 +92,17 @@ puts a
 a.delete(5)
 
 puts
+# 4.7.3 配列の連結 ---
+
+a = [1]
+b = [2,3]
+a.concat(b)
+puts a
+puts b
+puts
+a = [1]
+b = [2,3]
+a + b
+puts a
+puts b
+puts
