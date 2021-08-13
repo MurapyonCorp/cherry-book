@@ -71,3 +71,8 @@ puts a.last(2)
 puts
 puts a.first
 puts a.first(2)
+puts
+
+# 4.7.2 様々な要素の変更方法 ---
+
+puts
