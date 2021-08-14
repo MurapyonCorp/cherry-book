@@ -125,3 +125,12 @@ puts a - b
 puts
 puts a & b
 puts
+puts "4.7.5 多重代入で残りの全要素を配列として受け取る ---"
+e,f = 100,200,300
+puts e
+puts f
+puts
+e,*f = 100,200,300
+puts e
+puts f
+puts
