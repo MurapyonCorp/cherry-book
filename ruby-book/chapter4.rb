@@ -106,3 +106,22 @@ a + b
 puts a
 puts b
 puts
+
+# 4.7.4 配列の和集合、差集合、積集合 ---
+a = [1,2,3]
+b = [3,4,5]
+puts a | b
+puts
+puts a - b
+puts
+puts a & b
+puts
+require 'set'
+a = Set.new([1,2,3])
+b = Set.new([3,4,5])
+puts a | b
+puts
+puts a - b
+puts
+puts a & b
+puts
