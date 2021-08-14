@@ -134,3 +134,11 @@ e,*f = 100,200,300
 puts e
 puts f
 puts
+puts "4.7.6 1つの配列を複数の因数として展開する ---"
+a = []
+b = [2,3]
+puts a.push(1)
+puts a.push(b)
+puts
+puts a.push(*b)
+puts
