@@ -150,3 +150,9 @@ puts greeting('田中さん')
 puts greeting('田中さん','鈴木さん')
 puts greeting('田中さん','鈴木さん','佐藤さん')
 puts
+puts "4.7.8 *で配列同士を非破壊的に連結する ---"
+a = [1,2,3]
+puts [-1,0,*a,4,5]
+puts
+puts [-1,0] + a + [4,5]
+puts
