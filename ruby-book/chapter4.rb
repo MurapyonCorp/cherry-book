@@ -172,3 +172,7 @@ puts
 prefix = 'This is'
 puts %W(#{prefix}\ an\ apple small\nmelon orange)
 puts
+puts "4.7.11 文字列を配列に変換する ---"
+puts 'Ruby'.chars
+puts 'Ruby,Java,Perl,PHP'.split(',')
+puts
