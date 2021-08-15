@@ -160,3 +160,15 @@ puts "4.7.9 ==で等しい配列かどうか判断する ---"
 puts [1,2,3] == [1,2,3]
 puts [1,2,3] == [1,2]
 puts
+puts "4.7.10 %記法で文字列の配列を簡潔に作る ---"
+puts ['apple', 'melon', 'orange']
+puts
+puts %w!apple melon orange!
+puts
+puts %w(apple melon orange)
+puts
+puts %w(big\ apple small\ melon orange)
+puts
+prefix = 'This is'
+puts %W(#{prefix}\ an\ apple small\nmelon orange)
+puts
