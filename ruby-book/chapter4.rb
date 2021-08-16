@@ -183,3 +183,25 @@ puts
 a = Array.new(10) {|n|n % 3 + 1 }
 puts a
 puts
+puts "4.7.13 配列に初期値を設定する場合の注意点 ---"
+a = Array.new(5, 'default')
+puts a
+puts
+str = a[0]
+puts str
+str.upcase!
+puts str
+puts
+puts a
+puts
+a = Array.new(5) {'default'}
+puts a
+puts
+str = a[0]
+puts str
+puts
+str.upcase!
+puts str
+puts
+puts a
+puts
