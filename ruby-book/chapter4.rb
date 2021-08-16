@@ -205,3 +205,10 @@ puts str
 puts
 puts a
 puts
+puts "4.7.14 ミュータブル？　イミュータブル？"
+a = Array.new(5, 0)
+puts a
+puts
+n = a[0]
+puts n
+puts
