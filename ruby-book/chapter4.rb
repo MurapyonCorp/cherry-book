@@ -176,3 +176,10 @@ puts "4.7.11 文字列を配列に変換する ---"
 puts 'Ruby'.chars
 puts 'Ruby,Java,Perl,PHP'.split(',')
 puts
+puts "4.7.12 配列に初期値を設定する ---"
+a = Array.new(5,0)
+puts a
+puts
+a = Array.new(10) {|n|n % 3 + 1 }
+puts a
+puts
