@@ -212,8 +212,12 @@ puts
 n = a[0]
 print n
 puts
-'4.8 ブロックについてもっと詳しく'
+# '4.8 ブロックについてもっと詳しく'
 puts "4.8.1 添え字付きの繰り返し処理 ---"
 fruits = ['apple', 'orange', 'melon']
 fruits.each_with_index{ |fruit, i| puts "#{i}: #{fruit}" }
+puts
+puts "4.8.2 with_indexメソッドを使った添え字付きの繰り返し処理 ---"
+puts print fruits.map.with_index{ |fruit, i| "#{i}: #{fruit}" }
+puts print fruits.delete_if.with_index {|fruit, i| fruit.include?('a') && i.odd? }
 puts
