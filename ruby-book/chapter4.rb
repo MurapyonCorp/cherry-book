@@ -207,8 +207,13 @@ puts a
 puts
 puts "4.7.14 ミュータブル？　イミュータブル？"
 a = Array.new(5, 0)
-puts a
+print a
 puts
 n = a[0]
-puts n
+print n
+puts
+'4.8 ブロックについてもっと詳しく'
+puts "4.8.1 添え字付きの繰り返し処理 ---"
+fruits = ['apple', 'orange', 'melon']
+fruits.each_with_index{ |fruit, i| puts "#{i}: #{fruit}" }
 puts
