@@ -221,3 +221,9 @@ puts "4.8.2 with_indexメソッドを使った添え字付きの繰り返し処�
 puts print fruits.map.with_index{ |fruit, i| "#{i}: #{fruit}" }
 puts print fruits.delete_if.with_index {|fruit, i| fruit.include?('a') && i.odd? }
 puts
+puts "4.8.3 添え字を0以外の数値から開始させる ---"
+fruits = ['apple', 'orange', 'melon']
+fruits.each.with_index(1) {|fruit, i| puts "#{i}: #{fruit}" }
+puts
+puts print fruits.map.with_index(10) {|fruit, i| "#{i}: #{fruit}" }
+puts
