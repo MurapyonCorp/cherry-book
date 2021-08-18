@@ -265,3 +265,11 @@ numbers.each do |n; sum|
 end
 puts print sum
 puts
+
+puts "4.8.6 繰り返し処理以外でも使用されるブロック ---"
+File.open("./sample.txt", "w") do | file |
+  file. puts(" 1 行 目 の テキスト です。")
+  file. puts(" 2 行 目 の テキスト です。")
+  file. puts(" 3 行 目 の テキスト です。")
+end
+puts
