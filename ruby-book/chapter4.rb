@@ -273,3 +273,9 @@ File.open("./sample.txt", "w") do | file |
   file. puts(" 3 行 目 の テキスト です。")
 end
 puts
+
+puts "4.8.7 do...endと{}の結合度の違い ---"
+a = [1,2,3]
+puts print a.delete(100)
+a.delete (100) {puts print 'NG'}
+puts
