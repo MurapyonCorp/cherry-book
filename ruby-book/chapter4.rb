@@ -279,3 +279,13 @@ a = [1,2,3]
 puts print a.delete(100)
 a.delete (100) {puts print 'NG'}
 puts
+
+puts "4.8.8 ブロックを使うメソッドを定義する ---"
+names =['田中', '鈴木', '佐藤']
+san_names = names.map {|name| "#{name}さん"}.join('と')
+puts print san_names
+puts
+names.map do |name|
+  "#{name}さん"
+end.join('と')
+puts
