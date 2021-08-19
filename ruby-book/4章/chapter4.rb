@@ -308,3 +308,12 @@ puts print a
 14.downto(10) {|n| a << n }
 puts print a
 puts
+
+puts "4.9.3 stepメソッド ---"
+a = []
+1.step(10, 2) {|n| a << n }
+puts print a
+a = []
+10.step(1, -2) {|n| a << n }
+puts print a
+puts
