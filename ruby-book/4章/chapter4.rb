@@ -300,3 +300,11 @@ sum = 0
 5.times {sum += 1}
 puts print sum
 puts
+
+puts "4.9.2 uptoメソッドとdowntoメソッド ---"
+a = []
+10.upto(14) {|n| a << n }
+puts print a
+14.downto(10) {|n| a << n }
+puts print a
+puts
