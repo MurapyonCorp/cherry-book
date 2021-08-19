@@ -372,3 +372,12 @@ end
 puts print n
 puts print sum_value
 puts
+
+puts "4.9.6 loopメソッド ---"
+numbers = [1, 2, 3, 4, 5]
+loop do
+  n = numbers.sample
+  puts n
+  break if n == 5
+end
+puts
