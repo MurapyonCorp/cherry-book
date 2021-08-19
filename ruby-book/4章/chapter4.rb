@@ -212,7 +212,7 @@ puts
 n = a[0]
 print n
 puts
-# '4.8 ブロックについてもっと詳しく'
+# 4.8 ブロックについてもっと詳しく
 puts "4.8.1 添え字付きの繰り返し処理 ---"
 fruits = ['apple', 'orange', 'melon']
 fruits.each_with_index{ |fruit, i| puts "#{i}: #{fruit}" }
@@ -288,4 +288,15 @@ puts
 names.map do |name|
   "#{name}さん"
 end.join('と')
+puts
+
+# 4.9 さまざまな繰り返し処理
+puts "4.9.1 timesメソッド ---"
+sum = 0
+5.times {|n| sum += n}
+puts print sum
+puts
+sum = 0
+5.times {sum += 1}
+puts print sum
 puts
