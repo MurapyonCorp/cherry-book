@@ -317,3 +317,32 @@ a = []
 10.step(1, -2) {|n| a << n }
 puts print a
 puts
+
+puts "4.9.4 while文とuntil文 ---"
+a = []
+while a.size < 5
+  a << 1
+end
+puts print a
+
+a = []
+while a.size < 5 do a << 1 end
+puts print a
+
+a = []
+a << 1 while a.size < 5
+puts print a
+
+a = []
+begin
+  a << 1
+end while false
+puts print a
+puts
+
+a = [10, 20, 30, 40, 50]
+until a.size <= 3
+  a.delete_at(-1)
+end
+puts print a
+puts
