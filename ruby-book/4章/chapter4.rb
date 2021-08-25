@@ -439,3 +439,16 @@ ret =
   end
 puts ret
 puts
+
+puts "4.10.3 繰り返し処理で使うbreakとreturnの違い ---"
+def calc_with_return
+  numbers = [1,2, 3, 4, 5, 6]
+  target = nil
+  numbers.shuffle.each do |n|
+    target = n
+    return if n.even?
+  end
+  target * 10
+end
+puts calc_with_return
+puts
