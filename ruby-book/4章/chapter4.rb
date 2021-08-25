@@ -417,3 +417,25 @@ fruits.each do |fruit|
   end
 end
 puts
+
+puts "4.10.2 throwとcatchを使った大域脱出 ---"
+fruits = ['apple', 'melon', 'orange']
+numbers = [1, 2, 3]
+catch :done do
+  fruits.each do |fruit|
+    numbers.shuffle.each do |n|
+      puts "#{fruit}, #{n}"
+      if fruit == 'orange' && n == 3
+        throw :done
+      end
+    end
+  end
+end
+puts
+
+ret =
+  catch :done do
+    throw :done, 123
+  end
+puts ret
+puts
