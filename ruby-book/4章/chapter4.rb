@@ -442,7 +442,7 @@ puts
 
 puts "4.10.3 繰り返し処理で使うbreakとreturnの違い ---"
 def calc_with_return
-  numbers = [1,2, 3, 4, 5, 6]
+  numbers = [1, 2, 3, 4, 5, 6]
   target = nil
   numbers.shuffle.each do |n|
     target = n
@@ -451,4 +451,31 @@ def calc_with_return
   target * 10
 end
 puts calc_with_return
+puts
+
+puts "4.10.4 next ---"
+numbers = [1, 2, 3, 4, 5]
+numbers.each do |n|
+  next if n.even?
+  puts n
+end
+puts
+
+i = 0
+while i < numbers.size
+  n = numbers[i]
+  i += 1
+  next if n.even?
+  puts n
+end
+puts
+
+fruits = ['apple', 'melon', 'orange']
+numbers = [1, 2, 3, 4]
+fruits.each do |fruit|
+  numbers.each do |n|
+    next if n.even?
+    puts "#{fruit}, #{n}"
+  end
+end
 puts
