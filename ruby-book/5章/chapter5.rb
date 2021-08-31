@@ -7,3 +7,8 @@ puts convert_length(1,'m', 'in')
 puts conveert_length(15, 'in', 'm')
 puts convert_length(35000, 'ft', 'm')
 puts
+puts "5.1.3 この章で学ぶこと ---"
+puts "・ハッシュ"
+puts "シンボル"
+puts "ハッシュ・シンボルともにRubyプログラムの中ではすごく多く登場するデータ型。"
+puts
