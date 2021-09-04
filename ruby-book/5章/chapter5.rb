@@ -24,3 +24,16 @@ currencies['japan'] = '円'
 puts print currencies
 puts print currencies['india']
 puts
+
+puts "5.2.2 ハッシュを使った繰り返し処理 ---"
+currencies.each do |key, value|
+  puts "#{key}: #{value}"
+end
+puts
+# ブロック引数を１つにするとキーと値が配列に格納される。
+currencies.each do |key_value|
+  key = key_value[0]
+  value = key_value[1]
+  puts "#{key}: #{value}"
+end
+puts
