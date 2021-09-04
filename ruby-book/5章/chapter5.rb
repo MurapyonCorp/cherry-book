@@ -16,3 +16,11 @@ puts "5.1.4 ハッシュ ---"
 h = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee' }
 [1, 2, 3].each {|n| puts n }
 puts
+
+puts "5.2.1 要素の追加、変更、取得 ---"
+currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
+currencies['italy'] = 'euro'
+currencies['japan'] = '円'
+puts print currencies
+puts print currencies['india']
+puts
