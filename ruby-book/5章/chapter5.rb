@@ -17,6 +17,7 @@ h = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee' }
 [1, 2, 3].each {|n| puts n }
 puts
 
+# 5.2 ハッシュ
 puts "5.2.1 要素の追加、変更、取得 ---"
 currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 currencies['italy'] = 'euro'
@@ -54,4 +55,26 @@ puts print currencies
 currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 currencies.delete('italy'){|key| "Not found: #{key}"}
 puts print currencies
+puts
+
+# 5.3 シンボル
+puts "5.3.1 シンボルと文字列の違い ---"
+:apple.class #=> Symbol
+'apple'.class #=> String
+# シンボルのほうが文字列より高速比較が可能。
+puts 'apple' == 'apple'
+puts :apple == :apple
+# シンボルは同じIDになるが文字列はすべて異なる
+puts print :apple.object_id
+puts print :apple.object_id
+puts print 'apple'.object_id
+puts print 'apple'.object_id
+puts #シンボルはイミュータブルなオブジェクトであるため、破壊的な変更はできない。
+string = 'apple'
+string.upcase!
+puts print string
+puts
+symbol = :apple
+# symbol.upcase!
+puts print symbol
 puts
