@@ -78,3 +78,12 @@ symbol = :apple
 # symbol.upcase!
 puts print symbol
 puts
+
+puts "5.3.2 シンボルの特徴と主な用途 ---"
+currencies = {:japan => 'yen', :us => 'dollar', :india => 'rupee'}
+# シンボルと使って文字列より高速に値を取り出す。
+puts print currencies[:japan]
+puts #オブジェクトが持っているメソッド名をシンボルの配列にして返す。
+puts print 'apple'.methods
+puts print :apple.methods
+puts
