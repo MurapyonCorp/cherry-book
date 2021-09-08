@@ -111,3 +111,21 @@ person = {
 puts print person
 puts print person[:age]
 puts
+
+puts "5.4.3 メソッドのキーワード引数とハッシュ---"
+# キーワード引数に変更してみる
+def buy_burger(menu, drink: true, potato: true)
+  if drink
+    
+  end
+  if potato
+    
+  end
+end
+buy_burger('cheese', drink: true, potato: true)
+buy_burger('fish')
+# デフォルト値を持たないキーワード引数は呼び出し時に省略できない。
+# キーワード引数に一致するハッシュを引数に渡すことができる。
+params = {drink: true, potato: true}
+# buy_burger('fish', params)
+puts
