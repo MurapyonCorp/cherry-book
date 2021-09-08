@@ -87,3 +87,11 @@ puts #オブジェクトが持っているメソッド名をシンボルの配�
 puts print 'apple'.methods
 puts print :apple.methods
 puts
+
+# 5.4 続・ハッシュについて
+puts "5.4.1 ハッシュのキーにシンボルを使う"
+currencies = {japan: :yen, us: :dollar, india: :rupee}    #83行目とまったく一緒になる。
+puts print currencies[:us]
+currencies[:italy] = 'euro'
+puts print currencies
+puts
