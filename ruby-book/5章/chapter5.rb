@@ -87,3 +87,45 @@ puts #オブジェクトが持っているメソッド名をシンボルの配�
 puts print 'apple'.methods
 puts print :apple.methods
 puts
+
+# 5.4 続・ハッシュについて
+puts "5.4.1 ハッシュのキーにシンボルを使う---"
+currencies = {japan: :yen, us: :dollar, india: :rupee}    #83行目とまったく一緒になる。
+puts print currencies[:us]
+currencies[:italy] = 'euro'
+puts print currencies
+puts
+
+puts "5.4.2 キーや値に異なるデータ型を混在させる---"
+# 文字列とシンボルのキーをそれぞれ混在させる。
+hash = {'abc' => 123, def: 456}
+puts print hash['abc']
+puts print hash[:def]
+# ハッシュに格納する値は異なるデータ型が混在する可能性がある
+person = {
+  name: 'Alice',
+  age: 20,
+  friends: ['Bob', 'Carol'],
+  phones: {home: '1234-0000', mobile: '5678-0000'}
+}
+puts print person
+puts print person[:age]
+puts
+
+puts "5.4.3 メソッドのキーワード引数とハッシュ---"
+# キーワード引数に変更してみる
+def buy_burger(menu, drink: true, potato: true)
+  if drink
+    
+  end
+  if potato
+    
+  end
+end
+buy_burger('cheese', drink: true, potato: true)
+buy_burger('fish')
+# デフォルト値を持たないキーワード引数は呼び出し時に省略できない。
+# キーワード引数に一致するハッシュを引数に渡すことができる。
+params = {drink: true, potato: true}
+# buy_burger('fish', params)
+puts
