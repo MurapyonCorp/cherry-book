@@ -89,9 +89,25 @@ puts print :apple.methods
 puts
 
 # 5.4 続・ハッシュについて
-puts "5.4.1 ハッシュのキーにシンボルを使う"
+puts "5.4.1 ハッシュのキーにシンボルを使う---"
 currencies = {japan: :yen, us: :dollar, india: :rupee}    #83行目とまったく一緒になる。
 puts print currencies[:us]
 currencies[:italy] = 'euro'
 puts print currencies
+puts
+
+puts "5.4.2 キーや値に異なるデータ型を混在させる---"
+# 文字列とシンボルのキーをそれぞれ混在させる。
+hash = {'abc' => 123, def: 456}
+puts print hash['abc']
+puts print hash[:def]
+# ハッシュに格納する値は異なるデータ型が混在する可能性がある
+person = {
+  name: 'Alice',
+  age: 20,
+  friends: ['Bob', 'Carol'],
+  phones: {home: '1234-0000', mobile: '5678-0000'}
+}
+puts print person
+puts print person[:age]
 puts
