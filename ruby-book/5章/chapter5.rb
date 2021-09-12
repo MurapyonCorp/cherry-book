@@ -129,3 +129,8 @@ buy_burger('fish')
 params = {drink: true, potato: true}
 # buy_burger('fish', params)
 puts
+
+# 5.5 例題：長さの単位変換プログラムを作成する
+puts "5.5.1 テストコードを準備する　---"
+# 1. convert_length_testファイルを作成
+# 2. convert_lengthファイルを作成
