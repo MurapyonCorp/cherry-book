@@ -129,3 +129,17 @@ buy_burger('fish')
 params = {drink: true, potato: true}
 # buy_burger('fish', params)
 puts
+
+# 5.5 例題：長さの単位変換プログラムを作成する
+puts "5.5.1 テストコードを準備する　---"
+# 1. convert_length_testファイルを作成
+# 2. convert_lengthファイルを作成
+
+puts "5.5.2 いろんな単位を変換できるようにする ---"
+# インチからメートルへ変換
+# フィートからメートルへの変換
+
+puts "5.5.3 convert_lengthメソッドを改善する　---"
+# メソッドの引数を文字列からシンボルへ変換
+# キーワード引数を使用して引数の意味を明確化させる
+# ハッシュを定数化させる
