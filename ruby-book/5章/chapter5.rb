@@ -199,3 +199,17 @@ end
 # 最後に引数がハッシュであれば{}を省略可能
 puts print buy_burger({'drink' => true, 'potato' => true}, 'chesse')
 puts
+
+puts "5.6.6 ハッシュリテラルの{}とブロックの{} ---"
+def buy_burger(options = {}, menu)
+  puts options
+end
+buy_burger({'drink' => true, 'potato' => true}, 'chesse')
+puts print('Hello')
+puts print 'Hello'
+# 207行目の()を削除
+buy_burger({'drink' => true, 'potato' => true}, 'chesse')
+# ハッシュリテラルの{}ではなくブロックの{}と解釈される。メソッドの第1引数にハッシュを渡す場合は必ず()が必要！
+# 第2引数以降にハッシュがくる場合は()を省略してもエラーにならない
+buy_burger'cheese', 'drink' => true, 'potato' => true
+puts
