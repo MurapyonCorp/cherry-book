@@ -226,3 +226,31 @@ puts print array.to_h
 # 以前までは下記のようにしてハッシュに変換していた
 puts print Hash[array]
 puts
+
+puts "5.6.8 ハッシュの初期値を理解する ---"
+h = {}
+puts print h[:foo] #=> nil
+# nil以外を返したいときはHash.newでハッシュを作成し、引数に初期値となる値を指定する。
+h = Hash.new('hello')
+puts print h[:foo] #=> hello
+# newの引数として初期値を指定した場合は初期値として毎回オブジェクトが変わる。初期値に対して破壊的変更を加えると同時にほかの変数の値も変わってしまう。
+a = h[:foo]
+b = h[:bar]
+puts print a.equal?(b) #=> true
+a.upcase!
+puts print a
+puts print b
+# 上記問題を解決するにはHash.newとブロックを組み合わせて初期値を返すとよい。
+h = Hash.new{'hello'}
+a = h[:foo]
+b = h[:bar]
+puts print a.equal?(b)
+a.upcase!
+puts print a
+puts print b
+# ブロック引数を使って、ハッシュにキーと初期値も同時に設定するコードも良く使われる。
+h = Hash.new{|hash, key| hash[key] = 'hello'}
+puts h[:foo]
+puts h[:bar]
+puts h
+puts
