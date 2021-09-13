@@ -143,3 +143,114 @@ puts "5.5.3 convert_lengthメソッドを改善する　---"
 # メソッドの引数を文字列からシンボルへ変換
 # キーワード引数を使用して引数の意味を明確化させる
 # ハッシュを定数化させる
+puts
+
+# 5.6 ハッシュについてもっと詳しく
+puts "5.6.1 ハッシュで使用頻度の高いメソッド　---"
+
+'1. keys'
+"keysメソッドはハッシュのキーを配列で返す"
+currencies = {japan: 'yen', us: 'dollar', india: 'rupee'}
+puts print currencies.keys
+puts
+
+'2. values'
+"valuesメソッドはハッシュの値を配列で返す"
+puts print currencies.values
+puts
+
+'3. has_key?, key?, include?, member?'
+"has_key?メソッドはハッシュの中に指定されたキーが存在するかどうかを確認する"
+puts print currencies.has_key?(:japan)
+puts print currencies.has_key?(:italy)
+puts
+
+puts "5.6.2 **でハッシュを展開させる ---"
+'**をハッシュの前につけることでハッシュリテラル内で他のハッシュのキーと値を展開可能'
+h = {us: 'dollar', india: 'rupee'}
+pr = {japan: 'yen', **h}
+puts print pr
+{japan: 'yen'}.merge(h)
+puts
+
+puts "5.6.3 ハッシュを使った疑似キーワード引数 ---"
+# ハッシュを引数として受け取り、疑似キーワード引数を実現させる
+def buy_burger(menu, options = {})
+  drink = options[:drink]
+  potato = options[:potato]
+end
+puts print buy_burger('cheese', drink: true, potato: true)
+puts
+
+puts "5.6.4 任意のキーワードを受けつける**引数 ---"
+# 通常であればキーワード引数を使うメソッドに存在しないキーワードを渡すとエラーになる
+def buy_burger(menu, drink: true, potato: true, **others)
+  puts others
+  # **othersには任意のキーワードがハッシュとして格納される。
+end
+buy_burger('fish', drink: true, potato: true, salad: true, chicken: false)
+puts
+
+puts "5.6.5 メソッド呼び出し時の{}の省略 ---"
+def buy_burger(menu, options = {})
+  puts options
+  # optionsは任意のハッシュを受け付ける
+end
+# 最後に引数がハッシュであれば{}を省略可能
+puts print buy_burger({'drink' => true, 'potato' => true}, 'chesse')
+puts
+
+puts "5.6.6 ハッシュリテラルの{}とブロックの{} ---"
+def buy_burger(options = {}, menu)
+  puts options
+end
+buy_burger({'drink' => true, 'potato' => true}, 'chesse')
+puts print('Hello')
+puts print 'Hello'
+# 207行目の()を削除
+buy_burger({'drink' => true, 'potato' => true}, 'chesse')
+# ハッシュリテラルの{}ではなくブロックの{}と解釈される。メソッドの第1引数にハッシュを渡す場合は必ず()が必要！
+# 第2引数以降にハッシュがくる場合は()を省略してもエラーにならない
+buy_burger'cheese', 'drink' => true, 'potato' => true
+puts
+
+puts "5.6.7 ハッシュから配列へ、配列からハッシュへ ---"
+# ハッシュはto_aメソッドを使って配列に変換可能。このメソッドを使うとキーと値が1つの配列に入り、それが複数並んだ配列で返す。
+currencies = {japan: 'yen', us: 'dollar', india: 'rupee'}
+puts print currencies.to_a
+# 逆にto_hメソッドは配列をハッシュに変換する。ハッシュに変換する配列はキーと値の組み合わせごとに1つの配列に入り、その要素分だけ配列として並んでいる必要あり。
+array = [[:japan, "yen"], [:us, "dollar"], [:india, "rupee"]]
+puts print array.to_h
+# ハッシュとして解析不能な配列に対してはto_hメソッドは使えない。
+# キーが重複した場合は最後に登場した配列の要素がハッシュの値に採用される。特別な理由がなければ基本的にキーはユニークにしておくべき。
+# 以前までは下記のようにしてハッシュに変換していた
+puts print Hash[array]
+puts
+
+puts "5.6.8 ハッシュの初期値を理解する ---"
+h = {}
+puts print h[:foo] #=> nil
+# nil以外を返したいときはHash.newでハッシュを作成し、引数に初期値となる値を指定する。
+h = Hash.new('hello')
+puts print h[:foo] #=> hello
+# newの引数として初期値を指定した場合は初期値として毎回オブジェクトが変わる。初期値に対して破壊的変更を加えると同時にほかの変数の値も変わってしまう。
+a = h[:foo]
+b = h[:bar]
+puts print a.equal?(b) #=> true
+a.upcase!
+puts print a
+puts print b
+# 上記問題を解決するにはHash.newとブロックを組み合わせて初期値を返すとよい。
+h = Hash.new{'hello'}
+a = h[:foo]
+b = h[:bar]
+puts print a.equal?(b)
+a.upcase!
+puts print a
+puts print b
+# ブロック引数を使って、ハッシュにキーと初期値も同時に設定するコードも良く使われる。
+h = Hash.new{|hash, key| hash[key] = 'hello'}
+puts h[:foo]
+puts h[:bar]
+puts h
+puts
