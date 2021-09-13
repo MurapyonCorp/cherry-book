@@ -181,3 +181,12 @@ def buy_burger(menu, options = {})
 end
 puts print buy_burger('cheese', drink: true, potato: true)
 puts
+
+puts "5.6.4 任意のキーワードを受けつける**引数 ---"
+# 通常であればキーワード引数を使うメソッドに存在しないキーワードを渡すとエラーになる
+def buy_burger(menu, drink: true, potato: true, **others)
+  puts others
+  # **othersには任意のキーワードがハッシュとして格納される。
+end
+buy_burger('fish', drink: true, potato: true, salad: true, chicken: false)
+puts
