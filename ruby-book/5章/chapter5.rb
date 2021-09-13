@@ -213,3 +213,16 @@ buy_burger({'drink' => true, 'potato' => true}, 'chesse')
 # 第2引数以降にハッシュがくる場合は()を省略してもエラーにならない
 buy_burger'cheese', 'drink' => true, 'potato' => true
 puts
+
+puts "5.6.7 ハッシュから配列へ、配列からハッシュへ ---"
+# ハッシュはto_aメソッドを使って配列に変換可能。このメソッドを使うとキーと値が1つの配列に入り、それが複数並んだ配列で返す。
+currencies = {japan: 'yen', us: 'dollar', india: 'rupee'}
+puts print currencies.to_a
+# 逆にto_hメソッドは配列をハッシュに変換する。ハッシュに変換する配列はキーと値の組み合わせごとに1つの配列に入り、その要素分だけ配列として並んでいる必要あり。
+array = [[:japan, "yen"], [:us, "dollar"], [:india, "rupee"]]
+puts print array.to_h
+# ハッシュとして解析不能な配列に対してはto_hメソッドは使えない。
+# キーが重複した場合は最後に登場した配列の要素がハッシュの値に採用される。特別な理由がなければ基本的にキーはユニークにしておくべき。
+# 以前までは下記のようにしてハッシュに変換していた
+puts print Hash[array]
+puts
