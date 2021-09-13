@@ -164,3 +164,11 @@ puts
 puts print currencies.has_key?(:japan)
 puts print currencies.has_key?(:italy)
 puts
+
+puts "5.6.2 **でハッシュを展開させる ---"
+'**をハッシュの前につけることでハッシュリテラル内で他のハッシュのキーと値を展開可能'
+h = {us: 'dollar', india: 'rupee'}
+pr = {japan: 'yen', **h}
+puts print pr
+{japan: 'yen'}.merge(h)
+puts
