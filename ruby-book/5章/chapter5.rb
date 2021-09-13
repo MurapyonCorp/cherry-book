@@ -143,3 +143,24 @@ puts "5.5.3 convert_lengthメソッドを改善する　---"
 # メソッドの引数を文字列からシンボルへ変換
 # キーワード引数を使用して引数の意味を明確化させる
 # ハッシュを定数化させる
+puts
+
+# 5.6 ハッシュについてもっと詳しく
+puts "5.6.1 ハッシュで使用頻度の高いメソッド　---"
+
+'1. keys'
+"keysメソッドはハッシュのキーを配列で返す"
+currencies = {japan: 'yen', us: 'dollar', india: 'rupee'}
+puts print currencies.keys
+puts
+
+'2. values'
+"valuesメソッドはハッシュの値を配列で返す"
+puts print currencies.values
+puts
+
+'3. has_key?, key?, include?, member?'
+"has_key?メソッドはハッシュの中に指定されたキーが存在するかどうかを確認する"
+puts print currencies.has_key?(:japan)
+puts print currencies.has_key?(:italy)
+puts
