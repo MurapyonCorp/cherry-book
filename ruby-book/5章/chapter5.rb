@@ -190,3 +190,12 @@ def buy_burger(menu, drink: true, potato: true, **others)
 end
 buy_burger('fish', drink: true, potato: true, salad: true, chicken: false)
 puts
+
+puts "5.6.5 メソッド呼び出し時の{}の省略 ---"
+def buy_burger(menu, options = {})
+  puts options
+  # optionsは任意のハッシュを受け付ける
+end
+# 最後に引数がハッシュであれば{}を省略可能
+puts print buy_burger({'drink' => true, 'potato' => true}, 'chesse')
+puts
