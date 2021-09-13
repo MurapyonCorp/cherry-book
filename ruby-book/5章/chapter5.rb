@@ -172,3 +172,12 @@ pr = {japan: 'yen', **h}
 puts print pr
 {japan: 'yen'}.merge(h)
 puts
+
+puts "5.6.3 ハッシュを使った疑似キーワード引数 ---"
+# ハッシュを引数として受け取り、疑似キーワード引数を実現させる
+def buy_burger(menu, options = {})
+  drink = options[:drink]
+  potato = options[:potato]
+end
+puts print buy_burger('cheese', drink: true, potato: true)
+puts
