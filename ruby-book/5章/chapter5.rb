@@ -282,3 +282,23 @@ puts
 name = 'Alice'
 %i(hello\ngood-bye #{name.upcase})
 %I(hello\ngood-bye #{name.upcase})
+
+# <-- 5.7.3 シンボルと文字列の関係
+# 文字列とシンボルは別物で互換性はない
+string = 'apple'
+symbol = :apple
+string == symbol
+string + symbol
+
+# しかしto_symメソッドを使うと文字列をシンボルに変換可能
+string.to_sym
+string.to_sym == symbol
+
+# 逆にto_sメソッドでシンボルを文字列に変換可能
+symbol.to_s
+symbol.to_s == string
+
+# respond_to?メソッドは文字列とシンボルを同等に扱う。オブジェクトに対して文字列またはシンボルで指定した名前のメソッドを呼び出せるか調べる。
+'apple'.respond_to?('include?')
+'apple'.respond_to?(:include?)
+# メソッドによって同等に扱うか変わる。基本的に同等に扱わないケースが多い
