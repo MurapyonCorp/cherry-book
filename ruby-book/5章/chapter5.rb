@@ -254,3 +254,51 @@ puts h[:foo]
 puts h[:bar]
 puts h
 puts
+
+# 5.7 シンボルについてもっと詳しく
+puts "5.7.1 シンボルを作成するさまざまな方法 ---"
+# 識別子として無効な文字列はエラーになる。
+# :12345 => Syntax error
+# :ruby-is-fun
+# :ruby is fun
+# :()
+# シングルクォートで囲むとシンボルとして有効になる。
+:'12345'
+name = 'Alice'
+:"#{name.upcase}"
+# ハッシュを作成する際に”文字列：値”の形式で書いても文字列と同じように見なされてキーがシンボルとなる
+hash = {'abc': 123}
+puts
+
+# 5.7.2 %記法でシンボルやシンボルの配列を作成する
+# シンボルを作成する場合は%sを使う
+%s!ruby is fun!   # !は区切り文字
+%s(ruby is fun)   # ()も可能
+
+# シンボルの配列は%iを使い、空白文字が要素の区切りとなる
+%i(apple orange melon)
+
+# 改行文字、式展開を使用したい場合は%Iを使う
+name = 'Alice'
+%i(hello\ngood-bye #{name.upcase})
+%I(hello\ngood-bye #{name.upcase})
+
+# <-- 5.7.3 シンボルと文字列の関係
+# 文字列とシンボルは別物で互換性はない
+string = 'apple'
+symbol = :apple
+string == symbol
+string + symbol
+
+# しかしto_symメソッドを使うと文字列をシンボルに変換可能
+string.to_sym
+string.to_sym == symbol
+
+# 逆にto_sメソッドでシンボルを文字列に変換可能
+symbol.to_s
+symbol.to_s == string
+
+# respond_to?メソッドは文字列とシンボルを同等に扱う。オブジェクトに対して文字列またはシンボルで指定した名前のメソッドを呼び出せるか調べる。
+'apple'.respond_to?('include?')
+'apple'.respond_to?(:include?)
+# メソッドによって同等に扱うか変わる。基本的に同等に扱わないケースが多い
