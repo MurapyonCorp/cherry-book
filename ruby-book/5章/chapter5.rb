@@ -269,3 +269,16 @@ name = 'Alice'
 # ハッシュを作成する際に”文字列：値”の形式で書いても文字列と同じように見なされてキーがシンボルとなる
 hash = {'abc': 123}
 puts
+
+# 5.7.2 %記法でシンボルやシンボルの配列を作成する
+# シンボルを作成する場合は%sを使う
+%s!ruby is fun!   # !は区切り文字
+%s(ruby is fun)   # ()も可能
+
+# シンボルの配列は%iを使い、空白文字が要素の区切りとなる
+%i(apple orange melon)
+
+# 改行文字、式展開を使用したい場合は%Iを使う
+name = 'Alice'
+%i(hello\ngood-bye #{name.upcase})
+%I(hello\ngood-bye #{name.upcase})
