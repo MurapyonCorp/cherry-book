@@ -328,3 +328,15 @@ limit ||= 10
 limit # => 10
 # 327行目を展開
 limit = limit || 10
+
+# (3) ‼を使った真偽値の型変換
+def user_exists?
+  # データベースなどからユーザーを探す
+  # user = find_user
+  # if user
+  #   true
+  # else
+  #   false
+  # end
+  !!find_user   # 335~340をコンパクトにする
+end
