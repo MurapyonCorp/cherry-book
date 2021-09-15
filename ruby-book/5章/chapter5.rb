@@ -302,3 +302,41 @@ symbol.to_s == string
 'apple'.respond_to?('include?')
 'apple'.respond_to?(:include?)
 # メソッドによって同等に扱うか変わる。基本的に同等に扱わないケースが多い
+
+# 5.8 まとめ
+# (1) 条件分岐で変数に代入/ &.演算子
+# 国名に応じて通貨を返す
+def find_currency(country)
+  currencies = {japan: 'yen', us: 'dollar', india: 'rupee'}
+  currencies[country]
+end
+
+# 指定された国の通貨を大文字にして返す
+def show_currency(country)
+  currency = find_currency(country)
+  # nilでないことを確認　　　nilだとupcaseを呼び出せないから
+  currency&.upcase
+end
+show_currency(:japan)
+
+a = 'foo'
+a&.upcase
+
+# (2) ||=を使った自己代入
+limit = nil
+limit ||= 10
+limit # => 10
+# 327行目を展開
+limit = limit || 10
+
+# (3) ‼を使った真偽値の型変換
+def user_exists?
+  # データベースなどからユーザーを探す
+  # user = find_user
+  # if user
+  #   true
+  # else
+  #   false
+  # end
+  !!find_user   # 335~340をコンパクトにする
+end
