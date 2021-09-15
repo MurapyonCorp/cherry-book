@@ -321,3 +321,10 @@ show_currency(:japan)
 
 a = 'foo'
 a&.upcase
+
+# (2) ||=を使った自己代入
+limit = nil
+limit ||= 10
+limit # => 10
+# 327行目を展開
+limit = limit || 10
