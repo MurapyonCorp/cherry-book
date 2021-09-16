@@ -13,3 +13,14 @@
   age: 20,
   gender: :female
 }
+
+# -- 6.1.2 ハッシュ記法変換プログラムの実行例
+# <<TEXTは行指向文字列リテラルであり、文字列を作成する構文
+old_syntax = <<TEXT
+{
+  :name => 'Alice',
+  :age => 20,
+  :gender => :female
+}
+TEXT
+convert_hash_syntax(old_syntax)
