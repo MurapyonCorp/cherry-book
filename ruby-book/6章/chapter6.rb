@@ -24,3 +24,7 @@ old_syntax = <<TEXT
 }
 TEXT
 convert_hash_syntax(old_syntax)
+
+# -- 6.1.3 この章で学ぶこと
+# ・正規表現そのもの
+# ・Rubyにおける正規表現オブジェクト
