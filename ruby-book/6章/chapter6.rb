@@ -146,3 +146,8 @@ Rubyのハッシュ記法を文字列として受け取り、シンボルがキ�
 convert_hash_syntax_test.rbを作成する。
 convert_hash_syntax.rbを作成する。
 convert_hash_syntaxメソッドを仮実装する。
+
+-- 6.4.2 ハッシュ記法変換プログラムを実装する
+正規表現を使って効率的に変換する。
+Rubularの”Your test string”欄に入力する
+Rubular : https://rubular.com/
