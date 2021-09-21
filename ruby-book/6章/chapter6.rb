@@ -151,3 +151,11 @@ convert_hash_syntaxメソッドを仮実装する。
 正規表現を使って効率的に変換する。
 Rubularの”Your test string”欄に入力する
 Rubular : https://rubular.com/
+
+! 6.5 正規表現オブジェクトについてもっと詳しく
+-- 6.5.1 正規表現オブジェクトを作成する様々な方法
+Regexp.new('\d{3}-\d{4}')
+%r!http://example\.com!
+%r{http://example\.com}
+pattern = '\d{3}-\d{4}'
+'123-4567' =~ /#{pattern}/
