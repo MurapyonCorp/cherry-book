@@ -192,3 +192,13 @@ regexp = Regexp.new(pattern, Regexp::EXTENDED)
 '123-4567' =~ regexp
 regexp = Regexp.new('Hello.Bye', Regexp::IGNORECASE | Regexp::MULTILINE)
 "HELLO\nBYE" =~ regexp
+
+-- 6.5.4 組み込み変数でマッチの結果を取得する
+text = '私の誕生日は1977年7月17日です。'
+text =~ /(\d+)年(\d+)月(\d+)日/
+$~
+$&
+$1
+$2
+$3
+$+
