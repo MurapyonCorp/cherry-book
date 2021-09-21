@@ -210,3 +210,9 @@ Regexp.last_match
 Regexp.last_match(0)
 Regexp.last_match(1)
 Regexp.last_match(-1)
+
+-- 6.5.6 組み込み変数を書き換えないmatch?メソッド
+/\d{3}-\d{4}/.match?('123-4567')
+$~
+Regexp.last_match
+'123-4567'.match?(/\d{3}-\d{4}/)
