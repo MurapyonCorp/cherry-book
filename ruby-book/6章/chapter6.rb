@@ -202,3 +202,11 @@ $1
 $2
 $3
 $+
+
+-- 6.5.5 Regexp.last_matchでマッチの結果を取得する
+text = '私の誕生日は1977年7月17日です。'
+text =~ /(\d+)年(\d+)月(\d+)日/
+Regexp.last_match
+Regexp.last_match(0)
+Regexp.last_match(1)
+Regexp.last_match(-1)
