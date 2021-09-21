@@ -151,3 +151,68 @@ convert_hash_syntaxメソッドを仮実装する。
 正規表現を使って効率的に変換する。
 Rubularの”Your test string”欄に入力する
 Rubular : https://rubular.com/
+
+! 6.5 正規表現オブジェクトについてもっと詳しく
+-- 6.5.1 正規表現オブジェクトを作成する様々な方法
+Regexp.new('\d{3}-\d{4}')
+%r!http://example\.com!
+%r{http://example\.com}
+pattern = '\d{3}-\d{4}'
+'123-4567' =~ /#{pattern}/
+
+-- 6.5.2 case文で正規表を使う
+  text = '03-1234-5678'
+  case text
+  when /^\d{3}-\d{4}$/
+    puts '郵便番号です'
+  when /^\d{4}\/\d{1,2}\/\d{1,2}$/
+    puts '日付です'
+  when /^\d+-\d+-\d+$/
+    puts '電話番号です'
+  end
+
+  -- 6.5.3 正規表現オブジェクト作成時のオプション
+  "Hello\nBye" =~ /Hello.Bye/m
+regexp = Regexp.new('Hello.Bye', Regexp::MULTILINE)
+"Hello\nBye" =~ regexp
+
+regexp = /
+  \d{3}#郵便番号の先頭3桁
+  - #区切り文字のハイフン
+  \d{4}#郵便番号の末尾4桁
+/x
+'123-4567' =~ regexp
+
+pattern = <<'TEXT'
+  \d{3}#郵便番号の先頭3桁
+  -
+  \d{4}#郵便番号の末尾4桁
+TEXT
+regexp = Regexp.new(pattern, Regexp::EXTENDED)
+'123-4567' =~ regexp
+regexp = Regexp.new('Hello.Bye', Regexp::IGNORECASE | Regexp::MULTILINE)
+"HELLO\nBYE" =~ regexp
+
+-- 6.5.4 組み込み変数でマッチの結果を取得する
+text = '私の誕生日は1977年7月17日です。'
+text =~ /(\d+)年(\d+)月(\d+)日/
+$~
+$&
+$1
+$2
+$3
+$+
+
+-- 6.5.5 Regexp.last_matchでマッチの結果を取得する
+text = '私の誕生日は1977年7月17日です。'
+text =~ /(\d+)年(\d+)月(\d+)日/
+Regexp.last_match
+Regexp.last_match(0)
+Regexp.last_match(1)
+Regexp.last_match(-1)
+
+-- 6.5.6 組み込み変数を書き換えないmatch?メソッド
+/\d{3}-\d{4}/.match?('123-4567')
+$~
+Regexp.last_match
+'123-4567'.match?(/\d{3}-\d{4}/)
