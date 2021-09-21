@@ -170,3 +170,25 @@ pattern = '\d{3}-\d{4}'
   when /^\d+-\d+-\d+$/
     puts '電話番号です'
   end
+
+  -- 6.5.3 正規表現オブジェクト作成時のオプション
+  "Hello\nBye" =~ /Hello.Bye/m
+regexp = Regexp.new('Hello.Bye', Regexp::MULTILINE)
+"Hello\nBye" =~ regexp
+
+regexp = /
+  \d{3}#郵便番号の先頭3桁
+  - #区切り文字のハイフン
+  \d{4}#郵便番号の末尾4桁
+/x
+'123-4567' =~ regexp
+
+pattern = <<'TEXT'
+  \d{3}#郵便番号の先頭3桁
+  -
+  \d{4}#郵便番号の末尾4桁
+TEXT
+regexp = Regexp.new(pattern, Regexp::EXTENDED)
+'123-4567' =~ regexp
+regexp = Regexp.new('Hello.Bye', Regexp::IGNORECASE | Regexp::MULTILINE)
+"HELLO\nBYE" =~ regexp
