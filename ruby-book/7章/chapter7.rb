@@ -15,3 +15,13 @@ mikuni.exit(ticket) => false
 ticket = Ticket.new(190)
 umeda.enter(ticket)
 mikuni.exit(ticket) => true
+
+-- 7.1.2 この章で学ぶこと
+・オブジェクト指向プログラミングの基礎知識
+・クラスの定義
+・selfキーワード
+・クラスの継承
+・メソッドの公開レベル
+・定数
+・様々な種類の変数
+・クラス定義やRubyの言語使用に関する高度な話題
