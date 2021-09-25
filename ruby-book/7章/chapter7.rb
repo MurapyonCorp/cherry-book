@@ -51,3 +51,9 @@ users << User.new('Bob', 'Python', 30)
 users.each do |user|
   puts "氏名: #{full_name(user)}", "年齢: #{user.age}"
 end
+
+-- 7.2.2 オブジェクト指向プログラミング関連の用語
+alice = User.new('Alice', 'Ruby', 20)
+bob = User.new('Bob', 'Python', 30)
+alice.full_name
+bob.full_name
