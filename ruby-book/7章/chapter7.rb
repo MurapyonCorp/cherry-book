@@ -25,3 +25,29 @@ mikuni.exit(ticket) => true
 ・定数
 ・様々な種類の変数
 ・クラス定義やRubyの言語使用に関する高度な話題
+
+! 7.2 オブジェクト指向プログラミングの基礎知識
+-- 7.2.1 クラスを使う場合と使わない場合の比較
+# Userクラスを定義する
+class User
+  attr_reader :first_name, :last_name, :age
+  def initialize(first_name, last_name, age)
+    @first_name = first_name
+    @last_name = last_name
+    @age = age
+  end
+  # 氏名を作成するメソッド
+  def full_name(user)
+    "#{user.first_name} #{user.last_name}"
+  end
+end
+
+# ユーザーデータを作成
+users = []
+users << User.new('Alice', 'Ruby', 20)
+users << User.new('Bob', 'Python', 30)
+
+# ユーザーのデータを表示する
+users.each do |user|
+  puts "氏名: #{full_name(user)}", "年齢: #{user.age}"
+end
