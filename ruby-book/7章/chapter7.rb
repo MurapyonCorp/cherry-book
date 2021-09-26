@@ -119,3 +119,25 @@ end
 bob = UserBob.new('Alice')
 bob.name = 'Bob'
 bob.name
+
+-- 7.3.4 クラスメソッドの定義
+class ClassMethod
+  def initialize(name)
+    @name = name
+  end
+  
+  def self.create_users(names)
+    names.map do |name|
+      ClassMethod.new(name)
+    end
+  end
+
+  def hello
+    "Hello, I am #{@name}"
+  end
+end
+names = ['Alice', 'Bob', 'Carol']
+users = ClassMethod.create_users(names)
+users.each do |user|
+  puts user.hello
+end
