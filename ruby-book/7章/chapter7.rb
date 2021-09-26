@@ -78,3 +78,44 @@ class User
 end
 user = User.new
 user.hello
+
+-- 7.3.3 インスタンス変数とアクセサメソッド
+class Name
+  def initialize(name)
+    @name = name
+  end
+
+  def hello
+    "Hello, I am #{@name}"
+  end
+end
+alice = Name.new('Alice')
+alice.hello
+
+class Shuffle
+  def initialize(name)
+    @name = name
+  end
+  def hello
+    shuffled_name = @name.chars.shuffle.join
+    "Hello, I am #{shuffled_name}"
+  end
+end
+shuffle = Shuffle.new('Alice')
+shuffle.hello
+
+# アクセサメソッド
+class UserBob
+  def initialize(name)
+    @name = name
+  end
+  def name
+    @name
+  end
+  def name=(value)
+    @name = value
+  end
+end
+bob = UserBob.new('Alice')
+bob.name = 'Bob'
+bob.name
