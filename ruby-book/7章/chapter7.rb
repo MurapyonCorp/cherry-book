@@ -60,12 +60,21 @@ bob.full_name
 
 ! 7.3 クラスの定義
 -- 7.3.1 オブジェクトの作成とInitializeメソッド
+# class User
+#   def initialize(name, age)
+#     puts "name: #{name}, age: #{age}"
+#   end
+# end
+# User.new('Alice', 20)
+
+# user = User.new
+# user.initialize   #=> 外部呼出しはできない
+
+-- 7.3.2 インスタンスメソッドの定義
 class User
-  def initialize(name, age)
-    puts "name: #{name}, age: #{age}"
+  def hello
+    "Hello!"
   end
 end
-User.new('Alice', 20)
-
 user = User.new
-user.initialize   #=> 外部呼出しはできない
+user.hello
