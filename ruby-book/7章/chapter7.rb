@@ -57,3 +57,15 @@ alice = User.new('Alice', 'Ruby', 20)
 bob = User.new('Bob', 'Python', 30)
 alice.full_name
 bob.full_name
+
+! 7.3 クラスの定義
+-- 7.3.1 オブジェクトの作成とInitializeメソッド
+class User
+  def initialize(name, age)
+    puts "name: #{name}, age: #{age}"
+  end
+end
+User.new('Alice', 20)
+
+user = User.new
+user.initialize   #=> 外部呼出しはできない
