@@ -141,3 +141,15 @@ users = ClassMethod.create_users(names)
 users.each do |user|
   puts user.hello
 end
+
+-- 7.3.5 定数
+class Product
+  DEFAULT_PRICE = 0
+  attr_reader :name, :price
+  def initialize(name, price = DEFAULT_PRICE)
+    @name = name
+    @price = price
+  end
+end
+product = Product.new('A free movie')
+product.price
