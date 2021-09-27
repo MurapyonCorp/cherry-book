@@ -153,3 +153,9 @@ class Product
 end
 product = Product.new('A free movie')
 product.price
+
+
+! 7.4 例題：改札機プログラムの作成
+-- 7.4.1 テストコードを準備する
+・gate_test.rbを作成
+・gate.rbを作成
