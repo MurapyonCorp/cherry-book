@@ -186,3 +186,73 @@ Gateオブジェクトの作成を共通化しよう
 ・150円の切符を購入する
 ・十三で入場し、三国で出場する
 ・期待する結果：出場できる
+
+! 7.5 selfキーワード
+-- 7.5.1 selfの付け忘れで不具合が発生するケース
+class SelfForget
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+
+  def rename_to_bob
+    # selfなしでname=メソッドを呼ぶ
+    name = 'Bob'
+  end
+
+  def rename_to_carol
+    # self付きでname=メソッドを呼ぶ
+    self.name = 'Carol'
+  end
+
+  def rename_to_dave
+    # 直接インスタンス変数を書き換える
+    @name = 'Dave'
+  end
+end
+user = SelfForget.new('Alice')
+user.rename_to_bob
+user.name
+user.rename_to_carol
+user.name
+user.rename_to_dave
+user.name
+
+-- 7.5.2 クラスメソッドやクラス構文直下のself
+class Foo
+  # このputsはクラス定義の読み込み時に呼び出される
+  puts "クラス構文直下のself: #{self}"
+  def self.bar
+    puts "クラスメソッド内のself: #{self}"
+  end
+
+  def baz
+    puts "インスタンスメソッド内のself: #{self}"
+  end
+end
+Foo.bar
+foo = Foo.new
+foo.baz
+
+-- 7.5.3 クラスメソッドをインスタンスメソッドで呼び出す
+class CallInstance
+  attr_reader :name, :price
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+
+  # 金額を整形するクラスメソッド
+  def self.format_price(price)
+    "#{price}円"
+  end
+
+  def to_s
+    # インスタンスメソッドからクラスメソッドを呼び出す
+    formatted_price = CallInstance.format_price(price)
+    "name: #{name}, price: #{formatted_price}"
+  end
+end
+
+product = CallInstance.new('A great movie', 1000)
+product.to_s
