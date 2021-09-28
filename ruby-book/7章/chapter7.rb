@@ -186,3 +186,34 @@ Gateオブジェクトの作成を共通化しよう
 ・150円の切符を購入する
 ・十三で入場し、三国で出場する
 ・期待する結果：出場できる
+
+! 7.5 selfキーワード
+-- 7.5.1 selfの付け忘れで不具合が発生するケース
+class SelfForget
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+
+  def rename_to_bob
+    # selfなしでname=メソッドを呼ぶ
+    name = 'Bob'
+  end
+
+  def rename_to_carol
+    # self付きでname=メソッドを呼ぶ
+    self.name = 'Carol'
+  end
+
+  def rename_to_dave
+    # 直接インスタンス変数を書き換える
+    @name = 'Dave'
+  end
+end
+user = SelfForget.new('Alice')
+user.rename_to_bob
+user.name
+user.rename_to_carol
+user.name
+user.rename_to_dave
+user.name
