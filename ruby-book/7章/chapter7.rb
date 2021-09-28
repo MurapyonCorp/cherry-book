@@ -217,3 +217,19 @@ user.rename_to_carol
 user.name
 user.rename_to_dave
 user.name
+
+-- 7.5.2 クラスメソッドやクラス構文直下のself
+class Foo
+  # このputsはクラス定義の読み込み時に呼び出される
+  puts "クラス構文直下のself: #{self}"
+  def self.bar
+    puts "クラスメソッド内のself: #{self}"
+  end
+
+  def baz
+    puts "インスタンスメソッド内のself: #{self}"
+  end
+end
+Foo.bar
+foo = Foo.new
+foo.baz
