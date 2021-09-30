@@ -287,3 +287,14 @@ user.is_a?(DefaultObject)
 user.is_a?(Object)
 user.is_a?(BasicObject)
 user.is_a?(String)
+
+-- 7.6.4 ほかのクラスを継承したクラスを作る
+# Itemクラスとそれを継承したDVDクラス
+        Item
+         ↑
+        DVD
+class Item
+end
+
+class DVD < Item
+end
