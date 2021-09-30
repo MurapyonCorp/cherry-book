@@ -256,3 +256,107 @@ end
 
 product = CallInstance.new('A great movie', 1000)
 product.to_s
+
+! 7.6 クラスの継承
+--　7.6.1 標準ライブラリの継承関係
+          BasicObject
+              ↑
+            Object
+   ___________↑_____________
+  |         |        |      |
+String   Numeric   Array   Hash
+   _________↑___________________
+  |         |         |         |
+Integer   Float   Rational   Complex
+
+-- 7.6.2 デフォルトで継承されるObjectクラス
+class DefaultObject
+end
+user = DefaultObject.new
+user.to_s
+user.nil?
+DefaultObject.superclass
+user.methods.sort
+
+-- 7.6.3 オブジェクトのクラスを確認する
+user = DefaultObject.new
+user.class
+user.instance_of?(DefaultObject)
+user.instance_of?(String)
+user.is_a?(DefaultObject)
+user.is_a?(Object)
+user.is_a?(BasicObject)
+user.is_a?(String)
+
+-- 7.6.4 ほかのクラスを継承したクラスを作る
+# Itemクラスとそれを継承したDVDクラス
+        Item
+         ↑
+        DVD
+# class Item
+# end
+
+# class DVD < Item
+# end
+
+-- 7.6.5 superでスーパークラスのメソッドを呼び出す
+# class Item
+#   attr_reader :name, :price
+#   def initialize(name, price)
+#     @name = name
+#     @price = price
+#   end
+# end
+# item = Item.new('A great movie', 1000)
+# item.name
+# item.price
+
+# class DVD < Item
+  # def initialize(name, price)
+  #   super
+  # end
+# end
+# dvd = DVD.new('A great movie', 1000)
+# dvd.name
+# dvd.price
+
+-- 7.6.6 メソッドのオーバーライド
+class Item
+  attr_reader :name, :price
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+  
+  def to_s
+    "name: #{name}, price: #{price}"
+  end
+end
+
+class DVD < Item
+  attr_reader :running_time
+  def initialize(name, price, running_time)
+    super(name, price)
+    @running_time = running_time
+  end
+
+  def to_s
+    "#{super}, running_time: #{running_time}"
+  end
+end
+item = Item.new('A great movie', 1000)
+item.to_s
+dvd = DVD.new('An awesome film', 3000, 120)
+dvd.to_s
+
+-- 7.6.7 クラスメソッドの継承
+class FooSucceed
+  def self.hello
+    'hello'
+  end
+end
+
+class Bar < FooSucceed
+end
+FooSucceed.hello
+Bar.hello
