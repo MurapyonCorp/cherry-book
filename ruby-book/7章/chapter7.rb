@@ -293,8 +293,29 @@ user.is_a?(String)
         Item
          ↑
         DVD
+# class Item
+# end
+
+# class DVD < Item
+# end
+
+-- 7.6.5 superでスーパークラスのメソッドを呼び出す
 class Item
+  attr_reader :name, :price
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
 end
+item = Item.new('A great movie', 1000)
+item.name
+item.price
 
 class DVD < Item
+  # def initialize(name, price)
+  #   super
+  # end
 end
+dvd = DVD.new('A great movie', 1000)
+dvd.name
+dvd.price
