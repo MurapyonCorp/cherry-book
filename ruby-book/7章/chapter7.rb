@@ -348,3 +348,15 @@ item = Item.new('A great movie', 1000)
 item.to_s
 dvd = DVD.new('An awesome film', 3000, 120)
 dvd.to_s
+
+-- 7.6.7 クラスメソッドの継承
+class FooSucceed
+  def self.hello
+    'hello'
+  end
+end
+
+class Bar < FooSucceed
+end
+FooSucceed.hello
+Bar.hello
