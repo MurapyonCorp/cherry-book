@@ -300,22 +300,51 @@ user.is_a?(String)
 # end
 
 -- 7.6.5 superでスーパークラスのメソッドを呼び出す
+# class Item
+#   attr_reader :name, :price
+#   def initialize(name, price)
+#     @name = name
+#     @price = price
+#   end
+# end
+# item = Item.new('A great movie', 1000)
+# item.name
+# item.price
+
+# class DVD < Item
+  # def initialize(name, price)
+  #   super
+  # end
+# end
+# dvd = DVD.new('A great movie', 1000)
+# dvd.name
+# dvd.price
+
+-- 7.6.6 メソッドのオーバーライド
 class Item
   attr_reader :name, :price
   def initialize(name, price)
     @name = name
     @price = price
   end
+  
+  def to_s
+    "name: #{name}, price: #{price}"
+  end
 end
-item = Item.new('A great movie', 1000)
-item.name
-item.price
 
 class DVD < Item
-  # def initialize(name, price)
-  #   super
-  # end
+  attr_reader :running_time
+  def initialize(name, price, running_time)
+    super(name, price)
+    @running_time = running_time
+  end
+
+  def to_s
+    "#{super}, running_time: #{running_time}"
+  end
 end
-dvd = DVD.new('A great movie', 1000)
-dvd.name
-dvd.price
+item = Item.new('A great movie', 1000)
+item.to_s
+dvd = DVD.new('An awesome film', 3000, 120)
+dvd.to_s
