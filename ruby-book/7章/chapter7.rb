@@ -268,3 +268,12 @@ String   Numeric   Array   Hash
    _________↑___________________
   |         |         |         |
 Integer   Float   Rational   Complex
+
+-- 7.6.2 デフォルトで継承されるObjectクラス
+class DefaultObject
+end
+user = DefaultObject.new
+user.to_s
+user.nil?
+DefaultObject.superclass
+user.methods.sort
