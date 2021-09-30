@@ -277,3 +277,13 @@ user.to_s
 user.nil?
 DefaultObject.superclass
 user.methods.sort
+
+-- 7.6.3 オブジェクトのクラスを確認する
+user = DefaultObject.new
+user.class
+user.instance_of?(DefaultObject)
+user.instance_of?(String)
+user.is_a?(DefaultObject)
+user.is_a?(Object)
+user.is_a?(BasicObject)
+user.is_a?(String)
