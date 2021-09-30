@@ -256,3 +256,15 @@ end
 
 product = CallInstance.new('A great movie', 1000)
 product.to_s
+
+! 7.6 クラスの継承
+--　7.6.1 標準ライブラリの継承関係
+          BasicObject
+              ↑
+            Object
+   ___________↑_____________
+  |         |        |      |
+String   Numeric   Array   Hash
+   _________↑___________________
+  |         |         |         |
+Integer   Float   Rational   Complex
