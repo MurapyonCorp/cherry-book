@@ -360,3 +360,13 @@ class Bar < FooSucceed
 end
 FooSucceed.hello
 Bar.hello
+
+! 7.7 メソッドの公開レベル
+-- 7.7.1 publicメソッド
+class Public
+  def hello
+    'Hello!'
+  end
+end
+user = Public.new
+user.hello
