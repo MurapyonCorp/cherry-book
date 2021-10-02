@@ -29,18 +29,18 @@ mikuni.exit(ticket) => true
 ! 7.2 オブジェクト指向プログラミングの基礎知識
 -- 7.2.1 クラスを使う場合と使わない場合の比較
 # Userクラスを定義する
-class User
-  attr_reader :first_name, :last_name, :age
-  def initialize(first_name, last_name, age)
-    @first_name = first_name
-    @last_name = last_name
-    @age = age
-  end
-  # 氏名を作成するメソッド
-  def full_name(user)
-    "#{user.first_name} #{user.last_name}"
-  end
-end
+# class User
+#   attr_reader :first_name, :last_name, :age
+#   def initialize(first_name, last_name, age)
+#     @first_name = first_name
+#     @last_name = last_name
+#     @age = age
+#   end
+#   # 氏名を作成するメソッド
+#   def full_name(user)
+#     "#{user.first_name} #{user.last_name}"
+#   end
+# end
 
 # ユーザーデータを作成
 users = []
@@ -71,11 +71,11 @@ bob.full_name
 # user.initialize   #=> 外部呼出しはできない
 
 -- 7.3.2 インスタンスメソッドの定義
-class User
-  def hello
-    "Hello!"
-  end
-end
+# class User
+#   def hello
+#     "Hello!"
+#   end
+# end
 user = User.new
 user.hello
 
@@ -360,3 +360,129 @@ class Bar < FooSucceed
 end
 FooSucceed.hello
 Bar.hello
+
+! 7.7 メソッドの公開レベル
+-- 7.7.1 publicメソッド
+class Public
+  def hello
+    'Hello!'
+  end
+end
+user = Public.new
+user.hello
+
+-- 7.7.2 privateメソッド
+# class Private
+#   private
+#   def hello
+#     'Hello!'
+#   end
+# end
+# user = Private.new
+# user.hello
+
+class Private
+  def hello
+    "Hello, I am #{self.name}"
+  end
+
+  private
+  def name
+    'Alice'
+  end
+end
+user = Private.new
+user.hello
+
+-- 7.7.3 privateメソッドはサブクラスでも呼び出せる
+class ProSubclass
+  private
+  def name
+    'A great movie'
+  end
+end
+
+class CD < ProSubclass
+  def to_s
+    "name: #{name}"
+  end
+end
+
+cd = CD.new
+cd.to_s
+
+-- 7.7.4 クラスメソッドをprivateにしたい場合
+# class User
+#   class << self
+
+#     private
+#     def hello
+#       'Hello!'
+#     end
+#   end
+# end
+# User.hello
+
+# class User
+#   def self.hello
+#     'Hello!'
+#   end
+#   private_class_method :hello
+# end
+# User.hello
+
+-- 7.7.5 privateメソッドから先に定義する場合
+# class User
+#   private
+#   def Foo
+#   end
+
+#   public
+#   def bar
+#   end
+# end
+
+-- 7.7.6 あとからメソッドの公開レベルを変更する場合
+# class User
+#   def foo
+#     'foo'
+#   end
+#   def bar
+#     'bar'
+#   end
+
+#   private :foo, :bar
+
+#   # bazはpublicメソッド
+#   def baz
+#     'baz'
+#   end
+# end
+# user = User.new
+# user.foo
+# user.bar
+# user.baz
+
+-- 7.7.7 protectedメソッド
+# class User
+#   # weightは外部に公開しない
+#   attr_reader :name
+#   def initialize(name, weight)
+#     @name = name
+#     @weight = weight
+#   end
+#   # 自分がother_userより重い場合はtrue
+#   def heavier_than?(other_user)
+#     other_user.weight < @weight
+#   end
+
+#   protected
+#   def weight
+#     @weight
+#   end
+# end
+# alice = User.new('Alice', 50)
+# bob = User.new('Bob', 60)
+# alice.heavier_than?(bob)
+# bob.heavier_than?(alice)
+# alice.weight
