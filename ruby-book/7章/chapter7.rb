@@ -29,18 +29,18 @@ mikuni.exit(ticket) => true
 ! 7.2 オブジェクト指向プログラミングの基礎知識
 -- 7.2.1 クラスを使う場合と使わない場合の比較
 # Userクラスを定義する
-class User
-  attr_reader :first_name, :last_name, :age
-  def initialize(first_name, last_name, age)
-    @first_name = first_name
-    @last_name = last_name
-    @age = age
-  end
-  # 氏名を作成するメソッド
-  def full_name(user)
-    "#{user.first_name} #{user.last_name}"
-  end
-end
+# class User
+#   attr_reader :first_name, :last_name, :age
+#   def initialize(first_name, last_name, age)
+#     @first_name = first_name
+#     @last_name = last_name
+#     @age = age
+#   end
+#   # 氏名を作成するメソッド
+#   def full_name(user)
+#     "#{user.first_name} #{user.last_name}"
+#   end
+# end
 
 # ユーザーデータを作成
 users = []
@@ -71,11 +71,11 @@ bob.full_name
 # user.initialize   #=> 外部呼出しはできない
 
 -- 7.3.2 インスタンスメソッドの定義
-class User
-  def hello
-    "Hello!"
-  end
-end
+# class User
+#   def hello
+#     "Hello!"
+#   end
+# end
 user = User.new
 user.hello
 
@@ -410,3 +410,23 @@ end
 
 cd = CD.new
 cd.to_s
+
+-- 7.7.4 クラスメソッドをprivateにしたい場合
+# class User
+#   class << self
+
+#     private
+#     def hello
+#       'Hello!'
+#     end
+#   end
+# end
+# User.hello
+
+# class User
+#   def self.hello
+#     'Hello!'
+#   end
+#   private_class_method :hello
+# end
+# User.hello
