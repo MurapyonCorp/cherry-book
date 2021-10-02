@@ -370,3 +370,26 @@ class Public
 end
 user = Public.new
 user.hello
+
+-- 7.7.2 privateメソッド
+# class Private
+#   private
+#   def hello
+#     'Hello!'
+#   end
+# end
+# user = Private.new
+# user.hello
+
+class Private
+  def hello
+    "Hello, I am #{self.name}"
+  end
+
+  private
+  def name
+    'Alice'
+  end
+end
+user = Private.new
+user.hello
