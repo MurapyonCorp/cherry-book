@@ -430,3 +430,14 @@ cd.to_s
 #   private_class_method :hello
 # end
 # User.hello
+
+-- 7.7.5 privateメソッドから先に定義する場合
+class User
+  private
+  def Foo
+  end
+
+  public
+  def bar
+  end
+end
