@@ -432,12 +432,33 @@ cd.to_s
 # User.hello
 
 -- 7.7.5 privateメソッドから先に定義する場合
-class User
-  private
-  def Foo
-  end
+# class User
+#   private
+#   def Foo
+#   end
 
-  public
-  def bar
-  end
-end
+#   public
+#   def bar
+#   end
+# end
+
+-- 7.7.6 あとからメソッドの公開レベルを変更する場合
+# class User
+#   def foo
+#     'foo'
+#   end
+#   def bar
+#     'bar'
+#   end
+
+#   private :foo, :bar
+
+#   # bazはpublicメソッド
+#   def baz
+#     'baz'
+#   end
+# end
+# user = User.new
+# user.foo
+# user.bar
+# user.baz
