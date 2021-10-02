@@ -393,3 +393,20 @@ class Private
 end
 user = Private.new
 user.hello
+
+-- 7.7.3 privateメソッドはサブクラスでも呼び出せる
+class ProSubclass
+  private
+  def name
+    'A great movie'
+  end
+end
+
+class CD < ProSubclass
+  def to_s
+    "name: #{name}"
+  end
+end
+
+cd = CD.new
+cd.to_s
