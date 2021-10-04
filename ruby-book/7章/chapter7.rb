@@ -505,3 +505,12 @@ cd.to_s
 #     DEFAULT_PRICE = 0   => dynamic constant assignment (SyntaxError)
 #   end
 # end
+
+--7.8.1 定数と再代入
+class Product
+  DEFAULT_PRICE = 0
+  DEFAULT_PRICE = 1000
+end
+Product::DEFAULT_PRICE = 3000
+Product.freeze
+Product::DEFAULT_PRICE = 5000
