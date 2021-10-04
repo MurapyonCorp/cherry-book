@@ -143,16 +143,16 @@ users.each do |user|
 end
 
 -- 7.3.5 定数
-class Product
-  DEFAULT_PRICE = 0
-  attr_reader :name, :price
-  def initialize(name, price = DEFAULT_PRICE)
-    @name = name
-    @price = price
-  end
-end
-product = Product.new('A free movie')
-product.price
+# class Product
+#   DEFAULT_PRICE = 0
+#   attr_reader :name, :price
+#   def initialize(name, price = DEFAULT_PRICE)
+#     @name = name
+#     @price = price
+#   end
+# end
+# product = Product.new('A free movie')
+# product.price
 
 
 ! 7.4 例題：改札機プログラムの作成
@@ -486,3 +486,22 @@ cd.to_s
 # alice.heavier_than?(bob)
 # bob.heavier_than?(alice)
 # alice.weight
+
+! 7.8 定数についてもっと詳しく
+-- 7.8.0
+# class Product
+#   DEFAULT_PRICE = 0
+# end
+# Product::DEFAULT_PRICE  => 0
+
+# class Product
+#   DEFAULT_PRICE = 0
+#   private_constant :DEFAULT_PRICE
+# end
+# Product::DEFAULT_PRICE  => private constant Product::DEFAULT_PRICE referenced (NameError)
+
+# class Product
+#   def foo
+#     DEFAULT_PRICE = 0   => dynamic constant assignment (SyntaxError)
+#   end
+# end
