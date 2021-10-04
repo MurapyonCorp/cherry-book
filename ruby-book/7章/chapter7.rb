@@ -507,10 +507,20 @@ cd.to_s
 # end
 
 --7.8.1 定数と再代入
-class Product
-  DEFAULT_PRICE = 0
-  DEFAULT_PRICE = 1000
-end
-Product::DEFAULT_PRICE = 3000
-Product.freeze
-Product::DEFAULT_PRICE = 5000
+# class Product
+#   DEFAULT_PRICE = 0
+#   DEFAULT_PRICE = 1000
+# end
+# Product::DEFAULT_PRICE = 3000
+# Product.freeze
+# Product::DEFAULT_PRICE = 5000
+
+--7.8.2 定数はミュータブルなオブジェクトに注意する
+# class Product
+#   中身 の 文字列 も freeze する
+#   SOME_ NAMES = ['Foo'. freeze, 'Bar'. freeze, 'Baz'. freeze]. freeze
+#                                   ＝
+#   SOME_NAMES = ['Foo', 'Bar', 'Baz'].map(&:freeze).freeze
+# end
+# 今度 は 中身 も freeze し て いる ので 破壊的 な 変更 は でき ない
+# Product:: SOME_ NAMES[ 0]. upcase! => RuntimeError: can' t modify frozen String
