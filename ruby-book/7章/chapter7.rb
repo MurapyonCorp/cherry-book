@@ -143,16 +143,16 @@ users.each do |user|
 end
 
 -- 7.3.5 定数
-class Product
-  DEFAULT_PRICE = 0
-  attr_reader :name, :price
-  def initialize(name, price = DEFAULT_PRICE)
-    @name = name
-    @price = price
-  end
-end
-product = Product.new('A free movie')
-product.price
+# class Product
+#   DEFAULT_PRICE = 0
+#   attr_reader :name, :price
+#   def initialize(name, price = DEFAULT_PRICE)
+#     @name = name
+#     @price = price
+#   end
+# end
+# product = Product.new('A free movie')
+# product.price
 
 
 ! 7.4 例題：改札機プログラムの作成
@@ -486,3 +486,41 @@ cd.to_s
 # alice.heavier_than?(bob)
 # bob.heavier_than?(alice)
 # alice.weight
+
+! 7.8 定数についてもっと詳しく
+-- 7.8.0
+# class Product
+#   DEFAULT_PRICE = 0
+# end
+# Product::DEFAULT_PRICE  => 0
+
+# class Product
+#   DEFAULT_PRICE = 0
+#   private_constant :DEFAULT_PRICE
+# end
+# Product::DEFAULT_PRICE  => private constant Product::DEFAULT_PRICE referenced (NameError)
+
+# class Product
+#   def foo
+#     DEFAULT_PRICE = 0   => dynamic constant assignment (SyntaxError)
+#   end
+# end
+
+--7.8.1 定数と再代入
+# class Product
+#   DEFAULT_PRICE = 0
+#   DEFAULT_PRICE = 1000
+# end
+# Product::DEFAULT_PRICE = 3000
+# Product.freeze
+# Product::DEFAULT_PRICE = 5000
+
+--7.8.2 定数はミュータブルなオブジェクトに注意する
+# class Product
+#   中身 の 文字列 も freeze する
+#   SOME_ NAMES = ['Foo'. freeze, 'Bar'. freeze, 'Baz'. freeze]. freeze
+#                                   ＝
+#   SOME_NAMES = ['Foo', 'Bar', 'Baz'].map(&:freeze).freeze
+# end
+# 今度 は 中身 も freeze し て いる ので 破壊的 な 変更 は でき ない
+# Product:: SOME_ NAMES[ 0]. upcase! => RuntimeError: can' t modify frozen String
