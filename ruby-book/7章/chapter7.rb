@@ -333,21 +333,21 @@ class Item
   end
 end
 
-class DVD < Item
-  attr_reader :running_time
-  def initialize(name, price, running_time)
-    super(name, price)
-    @running_time = running_time
-  end
+# class DVD < Item
+#   attr_reader :running_time
+#   def initialize(name, price, running_time)
+#     super(name, price)
+#     @running_time = running_time
+#   end
 
-  def to_s
-    "#{super}, running_time: #{running_time}"
-  end
-end
-item = Item.new('A great movie', 1000)
-item.to_s
-dvd = DVD.new('An awesome film', 3000, 120)
-dvd.to_s
+#   def to_s
+#     "#{super}, running_time: #{running_time}"
+#   end
+# end
+# item = Item.new('A great movie', 1000)
+# item.to_s
+# dvd = DVD.new('An awesome film', 3000, 120)
+# dvd.to_s
 
 -- 7.6.7 クラスメソッドの継承
 class FooSucceed
@@ -545,4 +545,65 @@ cd.to_s
 #     @name
 #   end
 # end
+
+# class Audio < Product
+#   @name = 'DVD'
+#   def self.name
+#     # クラスインスタンス変数を参照
+#     @name
+#   end
+  
+#   def upcase_name
+#     # インスタンス変数を参照
+#     @name.upcase
+#   end
+# end
 # Product.name
+# Audio.name
+# product = Product.new('A great movie')
+# product.name
+
+# dvd = Audio.new('An awesome film')
+# dvd.name
+# dvd.upcase_name
+
+# Product.name
+# Audio.name
+
+-- 7.9.2 クラス変数
+class Product
+  @@name = 'Product'
+  def self.name
+    @@name
+  end
+
+  def initialize(name)
+    @@name = name
+  end
+
+  def name
+    @@name
+  end
+end
+
+class Audio < Product
+  @@name = 'DVD'
+  def self.name
+    @@name
+  end
+  
+  def upcase_name
+    @@name.upcase
+  end
+end
+Product.name
+Audio.name
+product = Product.new('A great movie')
+product.name
+
+dvd = Audio.new('An awesome film')
+dvd.name
+dvd.upcase_name
+
+Product.name
+Audio.name
