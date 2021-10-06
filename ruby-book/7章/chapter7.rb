@@ -524,3 +524,25 @@ cd.to_s
 # end
 # 今度 は 中身 も freeze し て いる ので 破壊的 な 変更 は でき ない
 # Product:: SOME_ NAMES[ 0]. upcase! => RuntimeError: can' t modify frozen String
+
+! 7.9 さまざまな種類の変数
+-- 7.9.1 クラスインスタンス変数
+# class Product
+#   クラスインスタンス変数
+#   @name = 'Product'
+#   def self.name
+#     クラスインスタンス変数
+#     @name
+#   end
+
+#   def initialize(name)
+#     インスタンス変数
+#     @name = name
+#   end
+
+#   def name
+#     インスタンス変数
+#     @name
+#   end
+# end
+# Product.name
