@@ -333,21 +333,21 @@ class Item
   end
 end
 
-class DVD < Item
-  attr_reader :running_time
-  def initialize(name, price, running_time)
-    super(name, price)
-    @running_time = running_time
-  end
+# class DVD < Item
+#   attr_reader :running_time
+#   def initialize(name, price, running_time)
+#     super(name, price)
+#     @running_time = running_time
+#   end
 
-  def to_s
-    "#{super}, running_time: #{running_time}"
-  end
-end
-item = Item.new('A great movie', 1000)
-item.to_s
-dvd = DVD.new('An awesome film', 3000, 120)
-dvd.to_s
+#   def to_s
+#     "#{super}, running_time: #{running_time}"
+#   end
+# end
+# item = Item.new('A great movie', 1000)
+# item.to_s
+# dvd = DVD.new('An awesome film', 3000, 120)
+# dvd.to_s
 
 -- 7.6.7 クラスメソッドの継承
 class FooSucceed
@@ -524,3 +524,108 @@ cd.to_s
 # end
 # 今度 は 中身 も freeze し て いる ので 破壊的 な 変更 は でき ない
 # Product:: SOME_ NAMES[ 0]. upcase! => RuntimeError: can' t modify frozen String
+
+! 7.9 さまざまな種類の変数
+-- 7.9.1 クラスインスタンス変数
+# class Product
+#   クラスインスタンス変数
+#   @name = 'Product'
+#   def self.name
+#     クラスインスタンス変数
+#     @name
+#   end
+
+#   def initialize(name)
+#     インスタンス変数
+#     @name = name
+#   end
+
+#   def name
+#     インスタンス変数
+#     @name
+#   end
+# end
+
+# class Audio < Product
+#   @name = 'DVD'
+#   def self.name
+#     # クラスインスタンス変数を参照
+#     @name
+#   end
+  
+#   def upcase_name
+#     # インスタンス変数を参照
+#     @name.upcase
+#   end
+# end
+# Product.name
+# Audio.name
+# product = Product.new('A great movie')
+# product.name
+
+# dvd = Audio.new('An awesome film')
+# dvd.name
+# dvd.upcase_name
+
+# Product.name
+# Audio.name
+
+-- 7.9.2 クラス変数
+# class Product
+#   @@name = 'Product'
+#   def self.name
+#     @@name
+#   end
+
+#   def initialize(name)
+#     @@name = name
+#   end
+
+#   def name
+#     @@name
+#   end
+# end
+
+# class Audio < Product
+#   @@name = 'DVD'
+#   def self.name
+#     @@name
+#   end
+  
+#   def upcase_name
+#     @@name.upcase
+#   end
+# end
+# Product.name
+# Audio.name
+# product = Product.new('A great movie')
+# product.name
+
+# dvd = Audio.new('An awesome film')
+# dvd.name
+# dvd.upcase_name
+
+# Product.name
+# Audio.name
+
+-- 7.9.3 グローバル変数と組み込み変数
+# $program_name = 'Awesome program'
+# class Program
+#   def initialize(name)
+#     $program_name = name
+#   end
+
+#   def self.name
+#     $program_name
+#   end
+
+#   def name
+#     $program_name
+#   end
+# end
+# Program.name
+# program = Program.new('Super program')
+# program.name
+
+# Program.name
+# $program_name
