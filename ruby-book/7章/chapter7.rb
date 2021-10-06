@@ -571,39 +571,61 @@ cd.to_s
 # Audio.name
 
 -- 7.9.2 クラス変数
-class Product
-  @@name = 'Product'
-  def self.name
-    @@name
-  end
+# class Product
+#   @@name = 'Product'
+#   def self.name
+#     @@name
+#   end
 
-  def initialize(name)
-    @@name = name
-  end
+#   def initialize(name)
+#     @@name = name
+#   end
 
-  def name
-    @@name
-  end
-end
+#   def name
+#     @@name
+#   end
+# end
 
-class Audio < Product
-  @@name = 'DVD'
-  def self.name
-    @@name
-  end
+# class Audio < Product
+#   @@name = 'DVD'
+#   def self.name
+#     @@name
+#   end
   
-  def upcase_name
-    @@name.upcase
-  end
-end
-Product.name
-Audio.name
-product = Product.new('A great movie')
-product.name
+#   def upcase_name
+#     @@name.upcase
+#   end
+# end
+# Product.name
+# Audio.name
+# product = Product.new('A great movie')
+# product.name
 
-dvd = Audio.new('An awesome film')
-dvd.name
-dvd.upcase_name
+# dvd = Audio.new('An awesome film')
+# dvd.name
+# dvd.upcase_name
 
-Product.name
-Audio.name
+# Product.name
+# Audio.name
+
+-- 7.9.3 グローバル変数と組み込み変数
+# $program_name = 'Awesome program'
+# class Program
+#   def initialize(name)
+#     $program_name = name
+#   end
+
+#   def self.name
+#     $program_name
+#   end
+
+#   def name
+#     $program_name
+#   end
+# end
+# Program.name
+# program = Program.new('Super program')
+# program.name
+
+# Program.name
+# $program_name
