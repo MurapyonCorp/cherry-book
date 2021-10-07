@@ -759,3 +759,19 @@ end
 #   end
 # end
 # alice.shuffle
+
+-- 7.10.8 クラスメソッドは特異メソッドの一種
+# class User
+# end
+# # クラス構文の外部でクラスメソッドを定義する方法1
+# def User.hello
+#   'Hello.'
+# end
+# #クラス構文の外部でクラスメソッドを定義する方法2
+# class << User
+#   def hi
+#     'Hi.'
+#   end
+# end
+# User.hello #=> "Hello."
+# User.hi #=> "Hi."
