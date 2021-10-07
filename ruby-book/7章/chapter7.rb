@@ -641,3 +641,10 @@ cd.to_s
 # user = User.new
 # user.hello
 # user.greeting
+
+-- 7.10.2 メソッドの削除
+# class User
+#   undef freeze
+# end
+# user = User.new
+# user.freeze
