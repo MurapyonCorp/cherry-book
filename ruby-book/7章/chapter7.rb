@@ -775,3 +775,12 @@ end
 # end
 # User.hello #=> "Hello."
 # User.hi #=> "Hi."
+
+-- 7.10.9 ダックタイピング
+# class Product
+#   def stock?
+#     raise 'Must implement stock? in subclass'
+#   end
+# end
+# product = Product.new('A great film', 1000)
+# product.display_text
