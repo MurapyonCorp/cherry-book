@@ -660,3 +660,35 @@ cd.to_s
 # end
 # blood_type = User::BloodType.new('B')
 # blood_type.type
+
+-- 7.10.4 演算子の挙動を独自に再定義する
+# class User
+#   def name=(value)
+#     @name = value
+#   end
+# end
+# user = User.new
+# user.name = 'Alice'
+
+# class Product
+#   attr_reader :code, :name
+#   def initialize(code, name)
+#     @code = code
+#     @name = name
+#   end
+#   # 付け加える
+#   def ==(other)
+#     if other.is_a?(Product)
+#       code == other.code
+#     else
+#       false
+#     end
+#   end
+# end
+# a = Product.new(' A-0001', 'A great movie')
+# b = Product.new(' B-0001', 'An awesome film')
+# c = Product.new(' A-0001', 'A great movie')
+
+# a == b  #'false'
+# a == c  #'false'  付け加えた後 => true
+# a == a  #'true'
