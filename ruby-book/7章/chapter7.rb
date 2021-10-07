@@ -750,3 +750,12 @@ end
 # end
 # user = User.new('Alice')
 # user.hello
+
+--  7.10.7 特異メソッド
+# alice = 'I am Alice'
+# class << alice
+#   def shuffle
+#     chars.shuffle.join
+#   end
+# end
+# alice.shuffle
