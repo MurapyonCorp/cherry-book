@@ -692,3 +692,41 @@ cd.to_s
 # a == b  #'false'
 # a == c  #'false'  付け加えた後 => true
 # a == a  #'true'
+
+-- 7.10.5 等値を判断するメソッドや演算子を理解する
+[equal?]
+a = 'abc'
+b = 'abc'
+a.equal?(b)
+c = a
+a.equal?(c)
+
+[==]
+1 == 1.0
+
+[eql?]
+h = {1 => 'Integer', 1.0 => 'Float'}
+h[1]
+h[1.0]
+1.eql?(1.0)
+a = 'japan'
+b = 'japan'
+c = 1
+d = 1.0
+a.eql?(b)
+a.hash
+b.hash
+c.eql?(d)
+c.hash
+d.hash
+
+[===]
+text = '03-1234-5678'
+case text
+when /^\d{3}-\d{4}$/
+  puts '郵便番号です'
+when /^\d{4}\/\d{1, 2}\/\d{1, 2}$/
+  puts '日付 です'
+when /^\d+-\d+-\d+$/
+  puts '電話番号です'
+end
