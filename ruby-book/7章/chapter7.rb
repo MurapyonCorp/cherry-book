@@ -730,3 +730,23 @@ when /^\d{4}\/\d{1, 2}\/\d{1, 2}$/
 when /^\d+-\d+-\d+$/
   puts '電話番号です'
 end
+
+-- 7.10.6 オープンクラスとモンキーパッチ
+# class User
+#   def initialize(name)
+#     @name = name
+#   end
+
+#   def hello
+#     "Hello, #{@name}"
+#   end
+# end
+
+# class User
+#   alias hello_original hello
+#   def hello
+#     "#{hello_original}じゃなくて、#{@name}さん、こんにちは！"
+#   end
+# end
+# user = User.new('Alice')
+# user.hello
