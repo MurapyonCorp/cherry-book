@@ -629,3 +629,158 @@ cd.to_s
 
 # Program.name
 # $program_name
+
+! 7.10 クラス定義やRubyの言語使用に関する高度な話題
+-- 7.10.1 エイリアスメソッドの定義
+# class User
+#   def hello
+#     'Hello!'
+#   end
+#   alias greeting hello
+# end
+# user = User.new
+# user.hello
+# user.greeting
+
+-- 7.10.2 メソッドの削除
+# class User
+#   undef freeze
+# end
+# user = User.new
+# user.freeze
+
+-- 7.10.3 ネストしたクラスの定義
+# class User
+#   class BloodType
+#     attr_reader :type
+#     def initialize(type)
+#       @type = type
+#     end
+#   end
+# end
+# blood_type = User::BloodType.new('B')
+# blood_type.type
+
+-- 7.10.4 演算子の挙動を独自に再定義する
+# class User
+#   def name=(value)
+#     @name = value
+#   end
+# end
+# user = User.new
+# user.name = 'Alice'
+
+# class Product
+#   attr_reader :code, :name
+#   def initialize(code, name)
+#     @code = code
+#     @name = name
+#   end
+#   # 付け加える
+#   def ==(other)
+#     if other.is_a?(Product)
+#       code == other.code
+#     else
+#       false
+#     end
+#   end
+# end
+# a = Product.new(' A-0001', 'A great movie')
+# b = Product.new(' B-0001', 'An awesome film')
+# c = Product.new(' A-0001', 'A great movie')
+
+# a == b  #'false'
+# a == c  #'false'  付け加えた後 => true
+# a == a  #'true'
+
+-- 7.10.5 等値を判断するメソッドや演算子を理解する
+[equal?]
+a = 'abc'
+b = 'abc'
+a.equal?(b)
+c = a
+a.equal?(c)
+
+[==]
+1 == 1.0
+
+[eql?]
+h = {1 => 'Integer', 1.0 => 'Float'}
+h[1]
+h[1.0]
+1.eql?(1.0)
+a = 'japan'
+b = 'japan'
+c = 1
+d = 1.0
+a.eql?(b)
+a.hash
+b.hash
+c.eql?(d)
+c.hash
+d.hash
+
+[===]
+text = '03-1234-5678'
+case text
+when /^\d{3}-\d{4}$/
+  puts '郵便番号です'
+when /^\d{4}\/\d{1, 2}\/\d{1, 2}$/
+  puts '日付 です'
+when /^\d+-\d+-\d+$/
+  puts '電話番号です'
+end
+
+-- 7.10.6 オープンクラスとモンキーパッチ
+# class User
+#   def initialize(name)
+#     @name = name
+#   end
+
+#   def hello
+#     "Hello, #{@name}"
+#   end
+# end
+
+# class User
+#   alias hello_original hello
+#   def hello
+#     "#{hello_original}じゃなくて、#{@name}さん、こんにちは！"
+#   end
+# end
+# user = User.new('Alice')
+# user.hello
+
+--  7.10.7 特異メソッド
+# alice = 'I am Alice'
+# class << alice
+#   def shuffle
+#     chars.shuffle.join
+#   end
+# end
+# alice.shuffle
+
+-- 7.10.8 クラスメソッドは特異メソッドの一種
+# class User
+# end
+# # クラス構文の外部でクラスメソッドを定義する方法1
+# def User.hello
+#   'Hello.'
+# end
+# #クラス構文の外部でクラスメソッドを定義する方法2
+# class << User
+#   def hi
+#     'Hi.'
+#   end
+# end
+# User.hello #=> "Hello."
+# User.hi #=> "Hi."
+
+-- 7.10.9 ダックタイピング
+# class Product
+#   def stock?
+#     raise 'Must implement stock? in subclass'
+#   end
+# end
+# product = Product.new('A great film', 1000)
+# product.display_text
