@@ -629,3 +629,15 @@ cd.to_s
 
 # Program.name
 # $program_name
+
+! 7.10 クラス定義やRubyの言語使用に関する高度な話題
+-- 7.10.1 エイリアスメソッドの定義
+# class User
+#   def hello
+#     'Hello!'
+#   end
+#   alias greeting hello
+# end
+# user = User.new
+# user.hello
+# user.greeting
