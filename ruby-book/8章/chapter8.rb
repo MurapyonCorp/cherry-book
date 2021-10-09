@@ -18,3 +18,11 @@
 # end
 # Bank::CURRENCIES.frozen? => true
 # Bank::CURRENCIES.all?({|key, value| key.frozen? && value.frozen?}) => true
+
+-- 8.1.2 この章で学ぶこと
+・モジュールの概要
+・モジュールのミックスイン(includeとextend)
+・モジュールを利用した名前空間の作成
+・関数や定数を提供するモジュールの作成
+・状態を保持するモジュールの作成
+・モジュールに関する高度な話題
