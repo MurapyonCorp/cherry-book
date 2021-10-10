@@ -34,3 +34,12 @@
 ・クラス名や定数名の衝突を防ぐために名前空間を作る。
 ・関数的メソッドを定義する。
 ・シングルトンオブジェクトのように扱って設定値などを保持する。
+
+-- 8.2.2 モジュールの定義
+module Greeter
+  def hello
+    'hello'
+  end
+end
+module AwesomeGreeter < Greeter
+end   => syntax error, unexpected '<' (SyntaxError)
