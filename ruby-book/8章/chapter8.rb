@@ -36,10 +36,55 @@
 ・シングルトンオブジェクトのように扱って設定値などを保持する。
 
 -- 8.2.2 モジュールの定義
-module Greeter
-  def hello
-    'hello'
-  end
-end
-module AwesomeGreeter < Greeter
-end   => syntax error, unexpected '<' (SyntaxError)
+# module Greeter
+#   def hello
+#     'hello'
+#   end
+# end
+# module AwesomeGreeter < Greeter
+# end   => syntax error, unexpected '<' (SyntaxError)
+
+! 8.3 モジュールのミックスイン(includeとextend)
+-- 8.3.1 モジュールをクラスにincludeする
+# module Loggable
+#   private
+#   def log(text)
+#     puts "[LOG] #{text}"
+#   end
+# end
+
+# class Product
+#   include Loggable
+#   def title
+#     log 'title is called.'
+#     'A great movie'
+#   end
+# end
+
+# class User
+#   include Loggable
+#   def name
+#     log 'name is called.'
+#     'Alice'
+#   end
+# end
+# product = Product.new
+# product.title
+# user = User.new
+# user.name
+
+-- 8.3.2 モジュールをextendする
+# module Loggable
+#   def log(text)
+#     puts "[LOG] #{text}"
+#   end
+# end
+
+# class Product
+#   extend Loggable
+#   def self.create_products(names)
+#     log 'create_products is called.'
+#   end
+# end
+# Product.create_products([])
+# Product.log('Hello.')
