@@ -106,3 +106,7 @@ class Bank
   extend DeepFreezable
   CURRENCIES = deep_freeze({'Japan' => 'yen', 'US' => 'dollar', 'India' => 'rupee'})
 end
+
+-- 8.4.2 テストコードを準備する
+・deep_freezable_test.rbを作成する
+・deep_freezable.rbを作成する
