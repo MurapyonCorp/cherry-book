@@ -110,3 +110,7 @@ end
 -- 8.4.2 テストコードを準備する
 ・deep_freezable_test.rbを作成する
 ・deep_freezable.rbを作成する
+
+-- 8.4.3 deep_freezeメソッドを実装する
+・team.rbを作成する
+・bank.rbを作成する
