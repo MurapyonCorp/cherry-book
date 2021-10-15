@@ -149,3 +149,15 @@
 # end
 # product = Product.new
 # product.price_tag
+
+-- 8.5.3 Enumerableモジュール
+Array.include?(Enumerable)
+Hash.include?(Enumerable)
+Range.include?(Enumerable)
+
+[1,2,3].map{|n| n*10}
+{a: 1, b: 2, c: 3}.map{|k, v|[k, v *10]}
+(1..3).map{|n| n *10}
+[1,2,3].count
+{a: 1, b: 2, c: 3}.count
+(1..3).count
