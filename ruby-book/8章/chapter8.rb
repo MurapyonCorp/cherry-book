@@ -247,3 +247,14 @@ String    Numeric    Array    Hash
 # user.name
 # user.change_name
 # user.name
+
+-- 8.5.9 オブジェクトに直接ミックスインする
+# module Loggable
+#   def log(text)
+#     puts "[LOG]#{text}"
+#   end
+# end
+# s = 'abc'
+# s.log('Hello.')
+# s.extend(Loggable)
+# s.log('Hello.')
