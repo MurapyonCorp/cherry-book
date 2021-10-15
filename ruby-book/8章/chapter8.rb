@@ -220,3 +220,30 @@ String    Numeric    Array    Hash
 #   p self
 #   p self.class
 # end
+
+-- 8.5.8 モジュールとインスタンス変数
+# module NameChanger
+#   def change_name
+#     # include先のクラスのインスタンス変数を変更する
+#     # @name = 'ありす'
+
+#     # セッターメソッド経由でデータを変更する
+#     self.name = 'ありす'
+#   end
+# end
+
+# class User
+#   include NameChanger
+#   # attr_reader :name
+
+#   # ゲッターメソッドとセッターメソッドを用意する
+#   attr_accessor :name
+
+#   def initialize(name)
+#     @name = name
+#   end
+# end
+# user = User.new('alice')
+# user.name
+# user.change_name
+# user.name
