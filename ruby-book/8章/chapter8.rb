@@ -209,3 +209,14 @@ String    Numeric    Array    Hash
 #   p self
 #   p self.class
 # end
+
+--8.5.7 クラスやモジュール自身もオブジェクト
+# class User
+#   p self
+#   p self.class
+# end
+
+# module Loggable
+#   p self
+#   p self.class
+# end
