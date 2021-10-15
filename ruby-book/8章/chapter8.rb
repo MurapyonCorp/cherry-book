@@ -120,15 +120,32 @@
 
 ! 8.5 ミックスインについてもっと詳しく
 -- 8.5.1 includeされたモジュールの有無を確認する
-module Loggable
+# module Loggable
   
-end
+# end
 
-class Product
-  include Loggable
-end
-Product.include?(Loggable)
-Product.included_modules
-product = Product.new
-product.is_a?(Product)
-product.class.included_modules
+# class Product
+#   include Loggable
+# end
+# Product.include?(Loggable)
+# Product.included_modules
+# product = Product.new
+# product.is_a?(Product)
+# product.class.included_modules
+
+-- 8.5.2 include先のメソッドを使うモジュール
+# module Taggable
+#   def  price_tag
+#     # priceメソッドはinclude先で定義されているはずという前提
+#     "#{price}円"
+#   end
+# end
+
+# class Product
+#   include Taggable
+#   def price
+#     1000
+#   end
+# end
+# product = Product.new
+# product.price_tag
