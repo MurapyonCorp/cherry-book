@@ -161,3 +161,35 @@ Range.include?(Enumerable)
 [1,2,3].count
 {a: 1, b: 2, c: 3}.count
 (1..3).count
+
+-- 8.5.4 Comparableモジュールと<=>演算子
+2 <=> 1
+2 <=> 2
+1 <=> 2
+2 <=> 'abc'
+
+# class Tempo
+#   include Comparable
+#   attr_reader :bpm
+#   def initialize(bpm)
+#     @bpm = bpm
+#   end
+
+#   def <=>(other)
+#     if other.is_a?(Tempo)
+#       bpm <=> other.bpm
+#     else
+#       nil
+#     end
+#   end
+
+#   def inspect
+#     "#{bpm}bpm"
+#   end
+# end
+# t_120 = Tempo.new(120)
+# t_180 = Tempo.new(180)
+
+# t_120 > t_180
+# t_120 <= t_180
+# t_120 == t_180
