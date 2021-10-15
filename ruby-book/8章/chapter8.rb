@@ -193,3 +193,11 @@ Range.include?(Enumerable)
 # t_120 > t_180
 # t_120 <= t_180
 # t_120 == t_180
+
+-- 8.5.5 Kernelモジュール
+            BasicObject
+                 ↑      include
+              Object--------------->Kernelモジュール
+  _______________↑_____________
+  |          |         |       |
+String    Numeric    Array    Hash
