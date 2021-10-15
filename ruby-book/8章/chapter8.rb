@@ -91,21 +91,21 @@
 
 ! 8.4 例題：deep_freezeメソッドの作成
 -- 8.4.1 実装の方針を検討する
-module DeepFreezable
-  def deep_freeze(array_or_hash)
+# module DeepFreezable
+#   def deep_freeze(array_or_hash)
     
-  end
-end
+#   end
+# end
 
-class Team
-  extend DeepFreezable
-  COUNTRIES = deep_freeze(['Japan', 'US', 'India'])
-end
+# class Team
+#   extend DeepFreezable
+#   COUNTRIES = deep_freeze(['Japan', 'US', 'India'])
+# end
 
-class Bank
-  extend DeepFreezable
-  CURRENCIES = deep_freeze({'Japan' => 'yen', 'US' => 'dollar', 'India' => 'rupee'})
-end
+# class Bank
+#   extend DeepFreezable
+#   CURRENCIES = deep_freeze({'Japan' => 'yen', 'US' => 'dollar', 'India' => 'rupee'})
+# end
 
 -- 8.4.2 テストコードを準備する
 ・deep_freezable_test.rbを作成する
@@ -117,3 +117,18 @@ end
 
 -- 8.4.4 deep_freezeメソッドをハッシュ対応させる
 ・テストコードを入力
+
+! 8.5 ミックスインについてもっと詳しく
+-- 8.5.1 includeされたモジュールの有無を確認する
+module Loggable
+  
+end
+
+class Product
+  include Loggable
+end
+Product.include?(Loggable)
+Product.included_modules
+product = Product.new
+product.is_a?(Product)
+product.class.included_modules
