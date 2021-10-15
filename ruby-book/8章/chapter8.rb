@@ -91,21 +91,21 @@
 
 ! 8.4 例題：deep_freezeメソッドの作成
 -- 8.4.1 実装の方針を検討する
-module DeepFreezable
-  def deep_freeze(array_or_hash)
+# module DeepFreezable
+#   def deep_freeze(array_or_hash)
     
-  end
-end
+#   end
+# end
 
-class Team
-  extend DeepFreezable
-  COUNTRIES = deep_freeze(['Japan', 'US', 'India'])
-end
+# class Team
+#   extend DeepFreezable
+#   COUNTRIES = deep_freeze(['Japan', 'US', 'India'])
+# end
 
-class Bank
-  extend DeepFreezable
-  CURRENCIES = deep_freeze({'Japan' => 'yen', 'US' => 'dollar', 'India' => 'rupee'})
-end
+# class Bank
+#   extend DeepFreezable
+#   CURRENCIES = deep_freeze({'Japan' => 'yen', 'US' => 'dollar', 'India' => 'rupee'})
+# end
 
 -- 8.4.2 テストコードを準備する
 ・deep_freezable_test.rbを作成する
@@ -117,3 +117,144 @@ end
 
 -- 8.4.4 deep_freezeメソッドをハッシュ対応させる
 ・テストコードを入力
+
+! 8.5 ミックスインについてもっと詳しく
+-- 8.5.1 includeされたモジュールの有無を確認する
+# module Loggable
+  
+# end
+
+# class Product
+#   include Loggable
+# end
+# Product.include?(Loggable)
+# Product.included_modules
+# product = Product.new
+# product.is_a?(Product)
+# product.class.included_modules
+
+-- 8.5.2 include先のメソッドを使うモジュール
+# module Taggable
+#   def  price_tag
+#     # priceメソッドはinclude先で定義されているはずという前提
+#     "#{price}円"
+#   end
+# end
+
+# class Product
+#   include Taggable
+#   def price
+#     1000
+#   end
+# end
+# product = Product.new
+# product.price_tag
+
+-- 8.5.3 Enumerableモジュール
+Array.include?(Enumerable)
+Hash.include?(Enumerable)
+Range.include?(Enumerable)
+
+[1,2,3].map{|n| n*10}
+{a: 1, b: 2, c: 3}.map{|k, v|[k, v *10]}
+(1..3).map{|n| n *10}
+[1,2,3].count
+{a: 1, b: 2, c: 3}.count
+(1..3).count
+
+-- 8.5.4 Comparableモジュールと<=>演算子
+2 <=> 1
+2 <=> 2
+1 <=> 2
+2 <=> 'abc'
+
+# class Tempo
+#   include Comparable
+#   attr_reader :bpm
+#   def initialize(bpm)
+#     @bpm = bpm
+#   end
+
+#   def <=>(other)
+#     if other.is_a?(Tempo)
+#       bpm <=> other.bpm
+#     else
+#       nil
+#     end
+#   end
+
+#   def inspect
+#     "#{bpm}bpm"
+#   end
+# end
+# t_120 = Tempo.new(120)
+# t_180 = Tempo.new(180)
+
+# t_120 > t_180
+# t_120 <= t_180
+# t_120 == t_180
+
+-- 8.5.5 Kernelモジュール
+            BasicObject
+                 ↑      include
+              Object--------------->Kernelモジュール
+  _______________↑_____________
+  |          |         |       |
+String    Numeric    Array    Hash
+
+-- 8.5.6 トップレベルはmainという名前のObject
+# p self
+# p self.class
+# class User
+#   p self
+#   p self.class
+# end
+
+--8.5.7 クラスやモジュール自身もオブジェクト
+# class User
+#   p self
+#   p self.class
+# end
+
+# module Loggable
+#   p self
+#   p self.class
+# end
+
+-- 8.5.8 モジュールとインスタンス変数
+# module NameChanger
+#   def change_name
+#     # include先のクラスのインスタンス変数を変更する
+#     # @name = 'ありす'
+
+#     # セッターメソッド経由でデータを変更する
+#     self.name = 'ありす'
+#   end
+# end
+
+# class User
+#   include NameChanger
+#   # attr_reader :name
+
+#   # ゲッターメソッドとセッターメソッドを用意する
+#   attr_accessor :name
+
+#   def initialize(name)
+#     @name = name
+#   end
+# end
+# user = User.new('alice')
+# user.name
+# user.change_name
+# user.name
+
+-- 8.5.9 オブジェクトに直接ミックスインする
+# module Loggable
+#   def log(text)
+#     puts "[LOG]#{text}"
+#   end
+# end
+# s = 'abc'
+# s.log('Hello.')
+# s.extend(Loggable)
+# s.log('Hello.')
