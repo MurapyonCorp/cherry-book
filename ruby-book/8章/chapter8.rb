@@ -201,3 +201,11 @@ Range.include?(Enumerable)
   _______________↑_____________
   |          |         |       |
 String    Numeric    Array    Hash
+
+-- 8.5.6 トップレベルはmainという名前のObject
+# p self
+# p self.class
+# class User
+#   p self
+#   p self.class
+# end
