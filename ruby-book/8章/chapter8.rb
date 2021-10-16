@@ -289,3 +289,14 @@ String    Numeric    Array    Hash
 #   module Associations
 #     # Keeps track of table aliases for ActiveRecord::Associations::JoinDependency
 #     class AliasTracker
+
+-- 8.6.3 ネストなしで名前空間付きのクラスを定義する
+# module Baseball
+# end
+
+# class Baseball::Second
+#   def initialize(player, uniform_number)
+#     @player = player
+#     @uniform_number = uniform_number
+#   end
+# end
