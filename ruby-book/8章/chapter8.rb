@@ -282,3 +282,10 @@ String    Numeric    Array    Hash
 # end
 # Baseball::Second.new('Alice', 13)
 # Clock::Second.new(13)
+
+-- 8.6.2 名前空間でグループやカテゴリを分ける
+# require "active_ support/core_ ext/string/conversions"
+# module ActiveRecord
+#   module Associations
+#     # Keeps track of table aliases for ActiveRecord::Associations::JoinDependency
+#     class AliasTracker
