@@ -258,3 +258,45 @@ String    Numeric    Array    Hash
 # s.log('Hello.')
 # s.extend(Loggable)
 # s.log('Hello.')
+
+
+! 8.6 モジュールを利用した名前空間の作成
+-- 8.6.1 名前空間を分けて名前の衝突を防ぐ
+# module Baseball
+#   # これはBaseballモジュールに属するSecondクラス
+#   class Second
+#     def initialize(player, uniform_number)
+#       @player = player
+#       @uniform_number = uniform_number
+#     end
+#   end
+# end
+
+# module Clock
+#   # これはClockモジュールに属するSecondクラス
+#   class Second
+#     def initialize(digits)
+#       @digits = digits
+#     end
+#   end
+# end
+# Baseball::Second.new('Alice', 13)
+# Clock::Second.new(13)
+
+-- 8.6.2 名前空間でグループやカテゴリを分ける
+# require "active_ support/core_ ext/string/conversions"
+# module ActiveRecord
+#   module Associations
+#     # Keeps track of table aliases for ActiveRecord::Associations::JoinDependency
+#     class AliasTracker
+
+-- 8.6.3 ネストなしで名前空間付きのクラスを定義する
+# module Baseball
+# end
+
+# class Baseball::Second
+#   def initialize(player, uniform_number)
+#     @player = player
+#     @uniform_number = uniform_number
+#   end
+# end
