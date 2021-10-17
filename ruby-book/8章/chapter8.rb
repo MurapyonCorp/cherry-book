@@ -303,11 +303,31 @@ String    Numeric    Array    Hash
 
 ! 8.7 関数や定数を提供するもじゅーつの作成
 -- 8.7.1 モジュールに特異メソッドを定義する
-module Loggable
-  class << self
-    def log(text)
-      puts "[LOG]#{text}"
-    end
-  end
-end
-Loggable.log('Hello')
+# module Loggable
+#   class << self
+#     def log(text)
+#       puts "[LOG]#{text}"
+#     end
+#   end
+# end
+# Loggable.log('Hello')
+
+-- 8.7.2 module_functionメソッド
+# module Loggable
+#   def log(text)
+#     puts "[LOG]#{text}"
+#   end
+#   module_function :log
+# end
+# Loggable.log('Hello.')
+
+# class Product
+#   include Loggable
+#   def title
+#     log 'title is called.'
+#     'A great movie'
+#   end
+# end
+# product = Product.new
+# product.title
+
