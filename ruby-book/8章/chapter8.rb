@@ -300,3 +300,14 @@ String    Numeric    Array    Hash
 #     @uniform_number = uniform_number
 #   end
 # end
+
+! 8.7 関数や定数を提供するもじゅーつの作成
+-- 8.7.1 モジュールに特異メソッドを定義する
+module Loggable
+  class << self
+    def log(text)
+      puts "[LOG]#{text}"
+    end
+  end
+end
+Loggable.log('Hello')
