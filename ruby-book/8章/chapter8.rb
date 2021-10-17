@@ -340,3 +340,18 @@ String    Numeric    Array    Hash
 #   end
 # end
 # Loggable::PREFIX
+
+-- 8.7.4 モジュール関数や定数を持つモジュールの例
+# Math.sqrt(2)
+# class Calculator
+#   include Math
+#   def calc_sqrt(n)
+#     sqrt(n)
+#   end
+# end
+# calculator = Calculator.new
+# calculator.calc_sqrt(2)
+# Math::E
+# Math::PI
+# Kernel.puts "Hello."
+# Kernel.p [1,2,3]
