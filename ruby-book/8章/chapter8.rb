@@ -300,3 +300,58 @@ String    Numeric    Array    Hash
 #     @uniform_number = uniform_number
 #   end
 # end
+
+! 8.7 関数や定数を提供するもじゅーつの作成
+-- 8.7.1 モジュールに特異メソッドを定義する
+# module Loggable
+#   class << self
+#     def log(text)
+#       puts "[LOG]#{text}"
+#     end
+#   end
+# end
+# Loggable.log('Hello')
+
+-- 8.7.2 module_functionメソッド
+# module Loggable
+#   def log(text)
+#     puts "[LOG]#{text}"
+#   end
+#   module_function :log
+# end
+# Loggable.log('Hello.')
+
+# class Product
+#   include Loggable
+#   def title
+#     log 'title is called.'
+#     'A great movie'
+#   end
+# end
+# product = Product.new
+# product.title
+
+-- 8.7.3 モジュールに定数を定義する
+# module Loggable
+#   # 定数を定義
+#   PREFIX = '[LOG]'.freeze
+#   def log(text)
+#     puts "#{PREFIX} #{text}"
+#   end
+# end
+# Loggable::PREFIX
+
+-- 8.7.4 モジュール関数や定数を持つモジュールの例
+# Math.sqrt(2)
+# class Calculator
+#   include Math
+#   def calc_sqrt(n)
+#     sqrt(n)
+#   end
+# end
+# calculator = Calculator.new
+# calculator.calc_sqrt(2)
+# Math::E
+# Math::PI
+# Kernel.puts "Hello."
+# Kernel.p [1,2,3]
