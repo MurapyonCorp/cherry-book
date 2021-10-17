@@ -331,3 +331,12 @@ String    Numeric    Array    Hash
 # product = Product.new
 # product.title
 
+-- 8.7.3 モジュールに定数を定義する
+# module Loggable
+#   # 定数を定義
+#   PREFIX = '[LOG]'.freeze
+#   def log(text)
+#     puts "#{PREFIX} #{text}"
+#   end
+# end
+# Loggable::PREFIX
