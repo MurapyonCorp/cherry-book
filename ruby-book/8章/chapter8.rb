@@ -355,3 +355,31 @@ String    Numeric    Array    Hash
 # Math::PI
 # Kernel.puts "Hello."
 # Kernel.p [1,2,3]
+
+! 8.8 状態を保持するモジュールの作成
+# module AwesomeAPI
+#   @base_url = ''
+#   @debug_mode = false
+
+#   class << self
+#     def base_url=(value)
+#       @base_url = value
+#     end
+
+#     def base_url
+#       @base_url
+#     end
+
+#     def debug_mode=(value)
+#       @debug_mode = value
+#     end
+
+#     def debug_mode
+#       @debug_mode
+#     end
+#   end
+# end
+# AwesomeAPI.base_url = 'http://example.com'
+# AwesomeAPI.debug_mode = true
+# AwesomeAPI.base_url
+# AwesomeAPI.debug_mode
