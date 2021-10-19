@@ -383,3 +383,114 @@ String    Numeric    Array    Hash
 # AwesomeAPI.debug_mode = true
 # AwesomeAPI.base_url
 # AwesomeAPI.debug_mode
+
+! 8.9 モジュールに関する高度な話題
+-- 8.9.1 メソッド探索のルールを理解する
+# module A
+#   def to_s
+#     "<A>#{super}"
+#   end
+# end
+
+# module B
+#   def to_s
+#     "<B>#{super}"
+#   end
+# end
+
+# class Product
+#   def to_s
+#     "<Product>#{super}"
+#   end
+# end
+
+# class DVD < Product
+#   include A
+#   include B
+#   def to_s
+#     "<DVD>#{super}"
+#   end
+# end
+# dvd = DVD.new
+# dvd.to_s
+# DVD.ancestors
+
+-- 8.9.2 モジュールにほかのモジュールをincludeする
+# module Greeting
+#   def hello
+#     'hello'
+#   end
+# end
+
+# module Aisatsu
+#   include Greeting
+#   def konnichiwa
+#     'こんにちは。'
+#   end
+# end
+
+# class User
+#   include Aisatsu
+# end
+# user = User.new
+# user.konnichiwa
+# user.hello
+# User.ancestors
+
+-- 8.9.3 prependでモジュールをミックスインする
+# module A
+#   def to_s
+#     "<A>#{super}"
+#   end
+# end
+
+# class Product
+#   prepend A
+#   def to_s
+#     "<Product>#{super}"
+#   end
+# end
+# product = Product.new
+# product.to_s
+
+-- 8.9.4 prependで既存のメソッドを置き換える
+# class Product
+#   def name
+#     "A great film"
+#   end
+# end
+
+# module NameDecorator
+#   def name
+#     "<<#{super}>>"
+#   end
+# end
+
+# class Product
+#   prepend NameDecorator
+# end
+
+# product = Product.new
+# product.name
+
+-- 8.9.5 有効範囲を限定できるrefinements
+# module StringShuffle
+#   refine String do
+#     def shuffle
+#       chars.shuffle.join
+#     end
+#   end
+# end
+
+# class User
+#   using StringShuffle
+#   def initialize(name)
+#     @name = name
+#   end
+
+#   def shuffled_name
+#     @name.shuffle
+#   end
+# end
+# user = User.new('Alice')
+# user.shuffled_name
