@@ -414,3 +414,25 @@ String    Numeric    Array    Hash
 # dvd = DVD.new
 # dvd.to_s
 # DVD.ancestors
+
+-- 8.9.2 モジュールにほかのモジュールをincludeする
+# module Greeting
+#   def hello
+#     'hello'
+#   end
+# end
+
+# module Aisatsu
+#   include Greeting
+#   def konnichiwa
+#     'こんにちは。'
+#   end
+# end
+
+# class User
+#   include Aisatsu
+# end
+# user = User.new
+# user.konnichiwa
+# user.hello
+# User.ancestors
