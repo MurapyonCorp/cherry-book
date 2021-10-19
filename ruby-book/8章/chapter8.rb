@@ -436,3 +436,19 @@ String    Numeric    Array    Hash
 # user.konnichiwa
 # user.hello
 # User.ancestors
+
+-- 8.9.3 prependでモジュールをミックスインする
+# module A
+#   def to_s
+#     "<A>#{super}"
+#   end
+# end
+
+# class Product
+#   prepend A
+#   def to_s
+#     "<Product>#{super}"
+#   end
+# end
+# product = Product.new
+# product.to_s
