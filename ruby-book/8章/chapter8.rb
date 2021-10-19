@@ -452,3 +452,23 @@ String    Numeric    Array    Hash
 # end
 # product = Product.new
 # product.to_s
+
+-- 8.9.4 prependで既存のメソッドを置き換える
+# class Product
+#   def name
+#     "A great film"
+#   end
+# end
+
+# module NameDecorator
+#   def name
+#     "<<#{super}>>"
+#   end
+# end
+
+# class Product
+#   prepend NameDecorator
+# end
+
+# product = Product.new
+# product.name
