@@ -494,3 +494,12 @@ String    Numeric    Array    Hash
 # end
 # user = User.new('Alice')
 # user.shuffled_name
+
+! 8.10 この章のまとめ
+この章で学んだ内容
+・モジュールの概要
+・モジュールのミックスイン(includeとextend)
+・モジュールを利用した名前空間の作成
+・関数や定数を提供するモジュールの作成
+・状態を保持するモジュールの作成
+・モジュールに関する高度な話題
