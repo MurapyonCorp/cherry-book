@@ -14,3 +14,14 @@
 ・例外の捕捉
 ・意図的に例外を発生させる方法
 ・例外処理のベストプラクティス
+
+! 9.2 例外の捕捉
+-- 9.2.1 発生した例外を捕捉しない場合
+# puts 'Start'
+# module Greeter
+#   def hello
+#     'hello'
+#   end
+# end
+# greeter = Greeter.new
+# puts 'End'      # irbコマンドであれば続けて先のコードも動かすことができるがrubyコマンドでは最後のEndは出力されない。
