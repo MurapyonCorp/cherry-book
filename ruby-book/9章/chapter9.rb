@@ -113,3 +113,12 @@
 #   puts "0で除算したか、存在しないメソッドが呼び出されました"
 #   puts "エラー: #{e.class} #{e.message}"
 # end
+
+-- 9.2.6 例外クラスの継承関係を理解する
+[例外処理の悪い例]
+# begin
+#   # 例外が起きそうな処理
+# rescue Exception
+#   # Exceptionとそのサブクラスが捕捉される。
+#   # つまりNoMemoryErrorやSystemExitまで捕捉される。StandardErrorクラスか、そのサブクラスに限定すべき。
+# end
