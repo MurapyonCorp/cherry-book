@@ -25,3 +25,27 @@
 # end
 # greeter = Greeter.new
 # puts 'End'      # irbコマンドであれば続けて先のコードも動かすことができるがrubyコマンドでは最後のEndは出力されない。
+
+-- 9.2.2 例外を捕捉して処理を続行する場合
+・例外処理の構文
+# begin
+#   # 例外が起きうる処理
+# rescue => exception
+#   # 例外が発生した場合の処理
+# end
+
+# puts 'Start.'
+# module Greeter
+#   def hello
+#     'hello'
+#   end
+# end
+
+# # 先ほどのプログラムに例外処理を組み込んで例外に対処する。
+# begin
+#   greeter = Greeter.new
+# rescue => exception
+#   puts '例外が発生したが、このまま続行する'
+# end
+# # 例外処理を組み込んだためrubyコマンドでも最後まで実行可能
+# puts 'End.'
