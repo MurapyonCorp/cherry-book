@@ -94,3 +94,22 @@
 #   puts e.backtrace
 #   puts "-----"
 # end
+
+-- 9.2.5 クラスを指定して捕捉する例外を限定する
+・例外のクラスを指定し、例外オブジェクトのクラスが一致した場合のみ例外を捕捉する構文
+# begin
+#   # 例外が起きうる処理
+# rescue 捕捉したい例外のクラス
+#   # 例外が発生した場合の処理
+# end
+
+# begin
+#   'abc'.foo
+# # rescue ZeroDivisionError
+# #   puts "0で除算しました"
+# # rescue NoMethodError
+# #   puts "存在しないメソッドが呼び出されました"
+# rescue ZeroDivisionError, NoMethodError => e
+#   puts "0で除算したか、存在しないメソッドが呼び出されました"
+#   puts "エラー: #{e.class} #{e.message}"
+# end
