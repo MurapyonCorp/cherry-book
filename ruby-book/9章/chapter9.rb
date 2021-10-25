@@ -122,3 +122,47 @@
 #   # Exceptionとそのサブクラスが捕捉される。
 #   # つまりNoMemoryErrorやSystemExitまで捕捉される。StandardErrorクラスか、そのサブクラスに限定すべき。
 # end
+
+-- 9.2.7 継承関係とrescue節の順番に注意する
+Exception
+    ↑
+StandardError
+    ↑
+NameError
+    ↑
+NoMethodError
+
+例：
+# begin
+#   # NoMethodErrorを発生させる
+#   'abc'.foo
+# rescue NameError
+#   # NoMethodErrorはここで捕捉される
+#   puts 'NameErrorです'
+# rescue NoMethodError
+#   # このrescue節は永遠に実行されない
+#   # NameErrorはNoMethodErrorのスーパークラスなので、NameErrorクラスを指定した最初のrescue節で捕捉されます。そのため、どんなことがあっても2つめのrescue節に到達することはないわけです。
+#   puts 'NoMethodErrorです'
+# end
+
+# begin
+#   # NoMethodErrorを発生させる
+#   # 'abc'.foo
+#   Foo.new
+# rescue NoMethodError
+#   # NoMethodErrorはここで捕捉される
+#   puts 'NoMethodErrorです'
+# rescue NameError
+#   puts 'NameErrorです'
+# end
+
+# begin
+#   # ZeroDivisionErrorを発生させる
+#   1 / 0
+# rescue NoMethodError
+#   puts 'NoMethodErrorです'
+# rescue NameError
+#   puts 'NameErrorです'
+# rescue
+#   puts 'その他のエラーです'
+# end
