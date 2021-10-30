@@ -190,3 +190,22 @@ NoMethodError
 #     puts "retryに失敗しました。"
 #   end
 # end
+
+! 9.3 意図的に例外を発生させる
+コードの中で意図的に例外を発生させることができる。その場合はraiseメソッドを使う。
+以下はメソッドで想定していない国名が渡されたときに例外を発生させる。
+# def currency_of(country)
+#   case country
+#     when :japan
+#       'yen'
+#     when :us
+#       'dollar'
+#     when :india
+#       'rupee'
+#     else
+#       # 意図的に例外を発生させる
+#       raise ArgumentError, "無効な国名です。#{country}"
+#   end
+# end
+# currency_of(:japan)
+# currency_of(:canada)
