@@ -233,19 +233,36 @@ rescueすべき例外のほうが少ない。プログラミング初心者の�
 例外をrescueしたらその場で情報を残さないと詳細な情報が失われてしまう。素早く原因を突き止め、適切な対策がとれるように詳細な情報を確実に残すようにしよう。
 
 -- 9.4.3 例外処理の対象範囲と対称クラスを極力絞り込む
-require 'date'
-def convert_heisei_to_date(heisei_text)
-  m = heisei_text.match(/平成(?<jp_year>\d+)年(?<month>\d+)月(?<day>\d+)日/)
-  year = m[:jp_year].to_i + 1988
-  month = m[:month].to_i
-  day = m[:day].to_i
-  # 例外処理の範囲を狭め、捕捉する例外クラスを限定する
-  begin
-    Date.new(year, month, day)
-  rescue ArgumentError
-    # 無効な日付であればnilを返す
-    nil
-  end
-end
-convert_heisei_to_date('平成26年12月31日')
-convert_heisei_to_date('平成30年60月87日')
+# require 'date'
+# def convert_heisei_to_date(heisei_text)
+#   m = heisei_text.match(/平成(?<jp_year>\d+)年(?<month>\d+)月(?<day>\d+)日/)
+#   year = m[:jp_year].to_i + 1988
+#   month = m[:month].to_i
+#   day = m[:day].to_i
+#   # 例外処理の範囲を狭め、捕捉する例外クラスを限定する
+#   begin
+#     Date.new(year, month, day)
+#   rescue ArgumentError
+#     # 無効な日付であればnilを返す
+#     nil
+#   end
+# end
+# convert_heisei_to_date('平成26年12月31日')
+# convert_heisei_to_date('平成30年60月87日')
+
+-- 9.4.4 例外処理よりも条件分岐を使う
+# require 'date'
+# def convert_heisei_to_date(heisei_text)
+#   m = heisei_text.match(/平成(?<jp_year>\d+)年(?<month>\d+)月(?<day>\d+)日/)
+#   year = m[:jp_year].to_i + 1988
+#   month = m[:month].to_i
+#   day = m[:day].to_i
+#   # 正しい日付の場合のみ、Dateオブジェクトを作成する
+#   if Date.valid_date?(year, month, day)
+#     Date.new(year, month, day)
+#   end
+# end
+# convert_heisei_to_date('平成26年12月31日')
+# convert_heisei_to_date('平成30年60月87日')
+bigin~rescueを使うよりも条件分岐を使ったほうが可読性やパフォーマンスの面で有利になる。
+例外処理を書く前に問題の有無を事前に確認できるメソッドが用意されていないかチェックしよう。
