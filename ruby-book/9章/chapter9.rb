@@ -266,3 +266,46 @@ rescueすべき例外のほうが少ない。プログラミング初心者の�
 # convert_heisei_to_date('平成30年60月87日')
 bigin~rescueを使うよりも条件分岐を使ったほうが可読性やパフォーマンスの面で有利になる。
 例外処理を書く前に問題の有無を事前に確認できるメソッドが用意されていないかチェックしよう。
+
+-- 9.4.5 予期しない条件は異常終了させる
+# elseを用意しないパターン(良くない例)
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   when :india
+#     'rupee'
+#   end
+# end
+# # 想定外の国名を渡すとnilが返る
+# currency_of(:italy)
+
+# elseを:indiaとして扱うパターン(良くない例)
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   else
+#     'rupee'
+#   end
+# end
+# currency_of(:italy)
+
+# elseに入ったら例外を発生させるパターン(良い例)
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   when :india
+#     'rupee'
+#   else
+#     raise ArgumentError, "無効な国名です。#{country}"
+#   end
+# end
+# currency_of(:italy)
