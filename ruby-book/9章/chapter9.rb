@@ -209,3 +209,103 @@ NoMethodError
 # end
 # currency_of(:japan)
 # currency_of(:canada)
+
+! 9.4 例外のベストプラクティス
+-- 9.4.1 安易にrescueを使わない
+rescueすべき例外のほうが少ない。プログラミング初心者の人は「例外が発生したら即座に異常終了させよう」もしくは「Railsなどのフレームワークの共通処理に全部丸投げしよう」と考えるほうが安全である。
+
+-- 9.4.2 rescueしたら情報を残す
+例外が発生してもrescueしない、というのが例外処理の原則。
+しかしケースによっては例外rescueを使用するほうが合理的な場合もある。そのときは例外時の状況を確実に記録に残そう。
+最低でも発生した例外の[クラス名、エラーメッセージ、バックトレース]の3つはログやターミナルに出力すべき。次のようなイメージだ。
+
+# 大量のユーザーにメールを送信する(例外が起きても最後まで続行する)
+# users.each do |user|
+#   begin
+#     # メール送信を実行する
+#     send_mail_to(user)
+#   rescue => e
+#     # (ログファイルがあればそこに出力するほうがベター)
+#     puts "#{e.class}: #{e.message}"
+#     puts e.backtrace
+#   end
+# end
+例外をrescueしたらその場で情報を残さないと詳細な情報が失われてしまう。素早く原因を突き止め、適切な対策がとれるように詳細な情報を確実に残すようにしよう。
+
+-- 9.4.3 例外処理の対象範囲と対称クラスを極力絞り込む
+# require 'date'
+# def convert_heisei_to_date(heisei_text)
+#   m = heisei_text.match(/平成(?<jp_year>\d+)年(?<month>\d+)月(?<day>\d+)日/)
+#   year = m[:jp_year].to_i + 1988
+#   month = m[:month].to_i
+#   day = m[:day].to_i
+#   # 例外処理の範囲を狭め、捕捉する例外クラスを限定する
+#   begin
+#     Date.new(year, month, day)
+#   rescue ArgumentError
+#     # 無効な日付であればnilを返す
+#     nil
+#   end
+# end
+# convert_heisei_to_date('平成26年12月31日')
+# convert_heisei_to_date('平成30年60月87日')
+
+-- 9.4.4 例外処理よりも条件分岐を使う
+# require 'date'
+# def convert_heisei_to_date(heisei_text)
+#   m = heisei_text.match(/平成(?<jp_year>\d+)年(?<month>\d+)月(?<day>\d+)日/)
+#   year = m[:jp_year].to_i + 1988
+#   month = m[:month].to_i
+#   day = m[:day].to_i
+#   # 正しい日付の場合のみ、Dateオブジェクトを作成する
+#   if Date.valid_date?(year, month, day)
+#     Date.new(year, month, day)
+#   end
+# end
+# convert_heisei_to_date('平成26年12月31日')
+# convert_heisei_to_date('平成30年60月87日')
+bigin~rescueを使うよりも条件分岐を使ったほうが可読性やパフォーマンスの面で有利になる。
+例外処理を書く前に問題の有無を事前に確認できるメソッドが用意されていないかチェックしよう。
+
+-- 9.4.5 予期しない条件は異常終了させる
+# elseを用意しないパターン(良くない例)
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   when :india
+#     'rupee'
+#   end
+# end
+# # 想定外の国名を渡すとnilが返る
+# currency_of(:italy)
+
+# elseを:indiaとして扱うパターン(良くない例)
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   else
+#     'rupee'
+#   end
+# end
+# currency_of(:italy)
+
+# elseに入ったら例外を発生させるパターン(良い例)
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   when :india
+#     'rupee'
+#   else
+#     raise ArgumentError, "無効な国名です。#{country}"
+#   end
+# end
+# currency_of(:italy)
