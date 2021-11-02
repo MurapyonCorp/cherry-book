@@ -319,11 +319,218 @@ bigin~rescueを使うよりも条件分岐を使ったほうが可読性やパ�
 No.8163の図9-6参照
 
 -- 9.5.3 文字入力を受け付けるgetsメソッド
-input = gets.chomp
+# input = gets.chomp
 # 改行は要らないため、chompメソッドを使う
-input
+# input
 
 -- 9.5.4 実装を開始する
 
 -- 9.5.5 例外処理を組み込む
 例外処理を組み込み、例外が発生したらエラーメッセージを表示させて再試行(retry)するようにする。
+
+! 9.6 例外処理についてもっと詳しく
+-- 9.6.1 ensure
+例外処理を入れたときに例外が発生するしないに関わらず必ず実行したい処理が出てくる場合にensure節を加える。
+以下は例外発生の有無に関わらず速やかにfileオブジェクトをクローズ(システム開放)
+する場合のコード例。
+
+# 書き込みモードでファイルを開く
+# file = File.open('some.txt', 'w')
+# begin
+#   # ファイルに文字列を書き込む
+#   file << 'Hello'
+# ensure
+#   # 例外の有無に関わらず必ずファイルをクローズする
+#   file.close
+# end
+
+-- 9.6.2 ensureの代わりにブロックを使う
+ファイルの読み書きを行う場合、openメソッドにブロックを渡すことでensure節やクローズ処理を省くことが可能。
+
+# ブロック付きでオープンすると、メソッドの実行後に自動的にクローズされる
+# File.open('some.txt', 'w') do |file|
+#   file << 'Hello'
+# end
+
+-- 9.6.3 例外処理のelse
+例外が発生しなかった場合に実行されるelse節を書くことも可能。
+しかしelse節はあまり使われない。begin節に処理を書けばよいから。
+
+# else節を使用
+# begin
+#   puts 'Hello'
+# rescue
+#   puts '例外が発生しました。'
+# else
+#   puts '例外は発生しませんでした。'
+# end
+
+# else節を使用しない
+# begin
+#   puts 'Hello'
+#   puts '例外は発生しませんでした。'
+# rescue
+#   puts '例外が発生しました。'
+# end
+
+-- 9.6.4 例外処理と戻り値
+例外処理にも戻り値があります。例外が発生せず、最後まで正常に処理が進んだ場合はbegin節の最後の式が戻り値になります。
+また、例外が発生してその例外が捕捉された場合はrescue節の最後の式が戻り値になります。
+例外処理の戻り値を変数に格納する方法もありますが、次のようにメソッドの戻り値として使うこともできます。
+
+# def some_method(n)
+#   begin
+#     1 / n
+#     'OK'
+#   rescue
+#     'error'
+#   ensure
+#     'ensure'
+#   end
+# end
+# some_method(1)
+# some_method(0)
+
+-- 9.6.5 'begin/end'を省略するrescue修飾子
+rescueは修飾子として使うこともできます。rescueを修飾子として使う場合の構文は次のようになります。
+例外が発生しそうな処理 rescue 例外が発生したときの戻り値
+例外が発生しなければ元の処理の値が、例外が発生した場合はrescue修飾子に書いた値が、それぞれ式全体の戻り値となります。
+
+以下はDateクラスを使い、引数として渡された文字列をパースしてDateクラスのオブジェクトに変換するメソッドです。
+ただし、パース不可能な文字列が渡されて例外が発生した場合はnilを返します。
+
+# require 'date'
+# def to_date(string)
+#   begin
+#     # 文字列のパースを試みる
+#     Date.parse(string)
+#   rescue ArgumentError
+#     # パースできない場合はnilを返す
+#     nil
+#   end
+# end
+# to_date('2018-05-24')
+# to_date('abc-def')
+
+rescue修飾子で書き換えると
+# require 'date'
+# def to_date(string)
+#   Date.parse(string) rescue nil
+# end
+# to_date('2018-05-24')
+# to_date('abc-def')
+
+-- 9.6.6 $!と$@に格納される例外情報
+Rubyでは最後に発生した例外は組み込み変数の$!に格納されます。また、バックトレース情報は$@に格納されます。
+つまり、以下の2つのコードは同じ処理をしていることになります。
+
+# rescue節で例外情報を変数eに格納する
+# begin
+#   1 / 0
+# rescue => e
+#   puts "#{e.class} #{e.message}"
+#   puts e.backtrace
+# end
+
+# # 組み込み変数の$!と$@に格納された例外情報を使う
+# begin
+#   1 / 0
+# rescue
+#   puts "#{$!.class} #{$!.message}"
+#   puts $@
+# end
+
+-- 9.6.7 例外処理の'begin/end'を省略できるケース
+メソッドの中身全体が例外処理で囲まれている場合はbeginキーワードとendキーワードを省略することができます。
+たとえば次のように、メソッドの最初から最後までが例外処理の対象になっているメソッドがあったとします。
+
+# def fizz_buzz(n)
+#   begin
+#     if n % 15 == 0
+#       'FizzBuzz'
+#     elsif n % 3 == 0
+#       'Fizz'
+#     elsif n % 5 == 0
+#       'Buzz'
+#     else
+#       n.to_s
+#     end
+#   rescue => e
+#     puts "#{e.class} #{e.message}"
+#   end
+# end
+# fizz_buzz(nil) # => NoMethodError undefined method `%' fornil:NilClass
+こういうケースでは例外処理のbeginとendを省略して次のように書くことができます。
+
+# def fizz_buzz(n)
+#   if n % 15 == 0
+#     'Fizz Buzz'
+#   elsif n % 3 == 0
+#     'Fizz'
+#   elsif n % 5 == 0
+#     'Buzz'
+#   else
+#     n.to_s
+#   end
+# rescue => e
+#   puts "#{e.class} #{e.message}"
+# end
+# fizz_buzz(nil)
+
+-- 9.6.8 rescueした例外を再度発生させる
+rescue節の中でraiseメソッドを使うこともできます。このときraiseメソッドの引数を省略すると、rescue節で捕捉した例外をもう一度発生させることができます。
+たとえば、例外が発生したらプログラム自体は異常終了させるものの、その情報はログに残したりメールで送信したりしたい、というときにこのテクニックが使えます。
+
+# def fizz_buzz(n)
+#   if n % 15 == 0
+#     'Fizz Buzz'
+#   elsif n % 3 == 0
+#     'Fizz'
+#   elsif n % 5 == 0
+#     'Buzz'
+#   else
+#     n.to_s
+#   end
+# rescue => e
+#   # 発生した例外をログやメールに残す(ここはputsで代用)
+#   puts "[LOG]エラーが発生しました：#{e.class} #{e.message}"
+#   # 捕捉した例外を再度発生させ、プログラム自体は異常終了させる
+#   raise
+# end
+# fizz_buzz(nil)
+
+-- 9.6.9 独自の例外クラスを定義する
+例外クラスは独自に定義することも可能です。
+例外クラスを定義する場合は特別な理由がない限り、StandardErrorクラスか、そのサブクラスを継承します（Exceptionクラスを直接継承しないようにしてください）。
+StandardErrorクラスを単純に継承するだけの方法もありますが、必要であれば独自のメソッドや独自の属性を追加することも可能です。
+
+# class NoCountryError < StandardError
+#   # 国名を属性として取得できるようにする
+#   attr_reader :country
+#   def initialize(message, country)
+#     @country = country
+#     super("#{message} #{country}")
+#   end
+# end
+
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   when :india
+#     'rupee'
+#   else
+#     # NoCountryErrorを発生させる
+#     raise NoCountryError.new('無効な国名です。', country)
+#   end
+# end
+
+# begin
+#   currency_of(:italy)
+# rescue NoCountryError => e
+#   # エラーメッセージと国名を出力する
+#   puts e.message
+#   puts e.country
+# end
