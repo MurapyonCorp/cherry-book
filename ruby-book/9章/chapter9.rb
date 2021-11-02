@@ -390,3 +390,32 @@ No.8163の図9-6参照
 # end
 # some_method(1)
 # some_method(0)
+
+-- 9.6.5 'begin/end'を省略するrescue修飾子
+rescueは修飾子として使うこともできます。rescueを修飾子として使う場合の構文は次のようになります。
+例外が発生しそうな処理 rescue 例外が発生したときの戻り値
+例外が発生しなければ元の処理の値が、例外が発生した場合はrescue修飾子に書いた値が、それぞれ式全体の戻り値となります。
+
+以下はDateクラスを使い、引数として渡された文字列をパースしてDateクラスのオブジェクトに変換するメソッドです。
+ただし、パース不可能な文字列が渡されて例外が発生した場合はnilを返します。
+
+# require 'date'
+# def to_date(string)
+#   begin
+#     # 文字列のパースを試みる
+#     Date.parse(string)
+#   rescue ArgumentError
+#     # パースできない場合はnilを返す
+#     nil
+#   end
+# end
+# to_date('2018-05-24')
+# to_date('abc-def')
+
+rescue修飾子で書き換えると
+# require 'date'
+# def to_date(string)
+#   Date.parse(string) rescue nil
+# end
+# to_date('2018-05-24')
+# to_date('abc-def')
