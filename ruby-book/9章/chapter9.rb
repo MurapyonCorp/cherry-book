@@ -476,3 +476,25 @@ Rubyでは最後に発生した例外は組み込み変数の$!に格納され�
 #   puts "#{e.class} #{e.message}"
 # end
 # fizz_buzz(nil)
+
+-- 9.6.8 rescueした例外を再度発生させる
+rescue節の中でraiseメソッドを使うこともできます。このときraiseメソッドの引数を省略すると、rescue節で捕捉した例外をもう一度発生させることができます。
+たとえば、例外が発生したらプログラム自体は異常終了させるものの、その情報はログに残したりメールで送信したりしたい、というときにこのテクニックが使えます。
+
+# def fizz_buzz(n)
+#   if n % 15 == 0
+#     'Fizz Buzz'
+#   elsif n % 3 == 0
+#     'Fizz'
+#   elsif n % 5 == 0
+#     'Buzz'
+#   else
+#     n.to_s
+#   end
+# rescue => e
+#   # 発生した例外をログやメールに残す(ここはputsで代用)
+#   puts "[LOG]エラーが発生しました：#{e.class} #{e.message}"
+#   # 捕捉した例外を再度発生させ、プログラム自体は異常終了させる
+#   raise
+# end
+# fizz_buzz(nil)
