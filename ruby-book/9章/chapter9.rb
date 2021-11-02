@@ -419,3 +419,23 @@ rescue修飾子で書き換えると
 # end
 # to_date('2018-05-24')
 # to_date('abc-def')
+
+-- 9.6.6 $!と$@に格納される例外情報
+Rubyでは最後に発生した例外は組み込み変数の$!に格納されます。また、バックトレース情報は$@に格納されます。
+つまり、以下の2つのコードは同じ処理をしていることになります。
+
+# rescue節で例外情報を変数eに格納する
+# begin
+#   1 / 0
+# rescue => e
+#   puts "#{e.class} #{e.message}"
+#   puts e.backtrace
+# end
+
+# # 組み込み変数の$!と$@に格納された例外情報を使う
+# begin
+#   1 / 0
+# rescue
+#   puts "#{$!.class} #{$!.message}"
+#   puts $@
+# end
