@@ -498,3 +498,39 @@ rescue節の中でraiseメソッドを使うこともできます。このとき
 #   raise
 # end
 # fizz_buzz(nil)
+
+-- 9.6.9 独自の例外クラスを定義する
+例外クラスは独自に定義することも可能です。
+例外クラスを定義する場合は特別な理由がない限り、StandardErrorクラスか、そのサブクラスを継承します（Exceptionクラスを直接継承しないようにしてください）。
+StandardErrorクラスを単純に継承するだけの方法もありますが、必要であれば独自のメソッドや独自の属性を追加することも可能です。
+
+# class NoCountryError < StandardError
+#   # 国名を属性として取得できるようにする
+#   attr_reader :country
+#   def initialize(message, country)
+#     @country = country
+#     super("#{message} #{country}")
+#   end
+# end
+
+# def currency_of(country)
+#   case country
+#   when :japan
+#     'yen'
+#   when :us
+#     'dollar'
+#   when :india
+#     'rupee'
+#   else
+#     # NoCountryErrorを発生させる
+#     raise NoCountryError.new('無効な国名です。', country)
+#   end
+# end
+
+# begin
+#   currency_of(:italy)
+# rescue NoCountryError => e
+#   # エラーメッセージと国名を出力する
+#   puts e.message
+#   puts e.country
+# end
