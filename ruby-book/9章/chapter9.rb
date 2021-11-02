@@ -319,9 +319,9 @@ bigin~rescueを使うよりも条件分岐を使ったほうが可読性やパ�
 No.8163の図9-6参照
 
 -- 9.5.3 文字入力を受け付けるgetsメソッド
-input = gets.chomp
+# input = gets.chomp
 # 改行は要らないため、chompメソッドを使う
-input
+# input
 
 -- 9.5.4 実装を開始する
 
@@ -350,4 +350,25 @@ input
 # ブロック付きでオープンすると、メソッドの実行後に自動的にクローズされる
 # File.open('some.txt', 'w') do |file|
 #   file << 'Hello'
+# end
+
+-- 9.6.3 例外処理のelse
+例外が発生しなかった場合に実行されるelse節を書くことも可能。
+しかしelse節はあまり使われない。begin節に処理を書けばよいから。
+
+# else節を使用
+# begin
+#   puts 'Hello'
+# rescue
+#   puts '例外が発生しました。'
+# else
+#   puts '例外は発生しませんでした。'
+# end
+
+# else節を使用しない
+# begin
+#   puts 'Hello'
+#   puts '例外は発生しませんでした。'
+# rescue
+#   puts '例外が発生しました。'
 # end
