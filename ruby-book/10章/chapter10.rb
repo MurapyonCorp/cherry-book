@@ -77,3 +77,15 @@ hello_proc.call
 
 Procオブジェクトを作成する場合は、Proc.newだけでなく、Kernelモジュールのprocメソッドを使うこともできます。どちらを使ってもかまいません。
 add_proc = proc{|a, b| a + b}
+
+-- 10.3.2 Procオブジェクトをブロックの代わりに渡す
+# def greeting(&block)
+#   puts 'おはよう'
+#   text = block.call('こんにちは')
+#   puts text
+#   puts 'こんばんは'
+# end
+
+# # Procオブジェクトを作成し、それをブロックの代わりとしてgreetingメソッドに渡す
+# repeat_proc = Proc.new{|text| text * 2}
+# greeting(&repeat_proc)
