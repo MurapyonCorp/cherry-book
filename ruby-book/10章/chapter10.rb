@@ -61,3 +61,19 @@ end
 # greeting do |text|
 #   text * 2
 # end
+
+! 10.3 Procオブジェクト
+-- 10.3.1 Procオブジェクトの基礎
+# "Hello"という文字列を返すProcオブジェクトを作成する
+# hello_proc = Proc.new do
+#   'Hello!'
+# end
+または
+hello_proc = Proc.new{'Hello!'}
+
+Procオブジェクトを実行したい場合はcallメソッドを使います。
+# Procオブジェクトを実行する(文字列が返る)
+hello_proc.call
+
+Procオブジェクトを作成する場合は、Proc.newだけでなく、Kernelモジュールのprocメソッドを使うこともできます。どちらを使ってもかまいません。
+add_proc = proc{|a, b| a + b}
