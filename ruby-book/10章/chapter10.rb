@@ -61,3 +61,87 @@ end
 # greeting do |text|
 #   text * 2
 # end
+
+! 10.3 Procオブジェクト
+-- 10.3.1 Procオブジェクトの基礎
+# "Hello"という文字列を返すProcオブジェクトを作成する
+# hello_proc = Proc.new do
+#   'Hello!'
+# end
+または
+hello_proc = Proc.new{'Hello!'}
+
+Procオブジェクトを実行したい場合はcallメソッドを使います。
+# Procオブジェクトを実行する(文字列が返る)
+hello_proc.call
+
+Procオブジェクトを作成する場合は、Proc.newだけでなく、Kernelモジュールのprocメソッドを使うこともできます。どちらを使ってもかまいません。
+add_proc = proc{|a, b| a + b}
+
+-- 10.3.2 Procオブジェクトをブロックの代わりに渡す
+# def greeting(&block)
+#   puts 'おはよう'
+#   text = block.call('こんにちは')
+#   puts text
+#   puts 'こんばんは'
+# end
+
+# # Procオブジェクトを作成し、それをブロックの代わりとしてgreetingメソッドに渡す
+# repeat_proc = Proc.new{|text| text * 2}
+# greeting(&repeat_proc)
+
+--　10.3.3 Procオブジェクトを普通の引数として渡す
+次のコードはgreetingメソッドでブロックを受け取るのではなく、Procオブジェクトを普通の引数として受け取って実行するコード例です。
+# ブロックではなく、1個のProcオブジェクトを引数として受け取る(&を付けない)
+# def greeting(arrange_proc)
+#   puts 'おはよう'
+#   text = arrange_proc.call('こんにちは')
+#   puts text
+#   puts 'こんばんは'
+# end
+
+# # Procオブジェクトを普通の引数としてgreetingメソッドに渡す(＆を付けない)
+# repeat_proc = Proc.new{|text| text * 2}
+# greeting(repeat_proc)
+
+-- 10.3.4 Proc.newとラムダの違い
+次のような構文やメソッドを使ってもProcオブジェクトを作成することができる。
+->(a, b){a + b}
+lambda {|a, b| a + b}
+
+Proc.newとラムダはほぼ同じものなのですが、微妙な違いが大きく分けて2つあります。
+1つは引数の扱いです。単純な呼び出しではProc.newもラムダも引数の扱いに違いはありません。
+以下はProc.newとラムダをそれぞれ実行するコード例です。
+
+# Proc.newの作成と実行
+add_proc = Proc.new{|a, b| a + b}
+add_proc.call(10, 20)
+
+# ラムダの作成と実行
+add_lambda = ->(a, b){a + b}
+add_lambda.call(10, 20)
+
+しかしラムダはProc.newよりも引数のチェックが厳密になる。
+#Proc.newの場合（引数がnilでもエラーが起きないようにto_iメソッドを使う）
+add_proc = Proc.new{|a, b| a.to_i + b.to_i}
+#Proc.newは引数が1つまたは3つでも呼び出しが可能
+add_proc.call(10)
+add_proc.call(10,20,100)
+#ラムダの場合
+add_lambda = ->(a, b){a.to_i + b.to_i}
+#ラムダは個数について厳密なので、引数が2個ちょうどでなければエラーになる
+add_lambda.call(10)
+add_lambda.call(10,20,30)
+
+-- 10.3.5 Proc.newかラムダかを判断するlambda？メソッド
+ProcクラスのインスタンスがProc.newとして作られたのか、それともラムダとして作られたのか判断したい場合はlambda?メソッドを使います。
+このメソッドはその名のとおり、ラムダとして作られたProcオブジェクトであればtrueを返します。
+# Proc.newの場合
+aa_proc = Proc.new{|a, b| a + b}
+aa_proc.class
+aa_proc.lambda?
+
+# ラムダの場合
+aa_lambda = ->(a, b){a + b}
+aa_lambda.class
+aa_lambda.lambda?
