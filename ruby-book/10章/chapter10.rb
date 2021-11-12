@@ -132,3 +132,16 @@ add_lambda = ->(a, b){a.to_i + b.to_i}
 #ラムダは個数について厳密なので、引数が2個ちょうどでなければエラーになる
 add_lambda.call(10)
 add_lambda.call(10,20,30)
+
+-- 10.3.5 Proc.newかラムダかを判断するlambda？メソッド
+ProcクラスのインスタンスがProc.newとして作られたのか、それともラムダとして作られたのか判断したい場合はlambda?メソッドを使います。
+このメソッドはその名のとおり、ラムダとして作られたProcオブジェクトであればtrueを返します。
+# Proc.newの場合
+aa_proc = Proc.new{|a, b| a + b}
+aa_proc.class
+aa_proc.lambda?
+
+# ラムダの場合
+aa_lambda = ->(a, b){a + b}
+aa_lambda.class
+aa_lambda.lambda?
