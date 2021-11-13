@@ -157,3 +157,6 @@ module Effects
     end
   end
 end
+-- 10.4.2 テストコードも2つに分ける
+今回はWordSynthクラスとEffectsモジュールという2種類のクラス／モジュールが登場します。
+EffectsモジュールについてはEffectsTestで、WordSynthクラスについてはWordSynthTestで、それぞれテストコードを書くことにします。
