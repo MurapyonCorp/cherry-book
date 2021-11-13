@@ -165,3 +165,6 @@ EffectsモジュールについてはEffectsTestで、WordSynthクラスにつ�
 -- 10.4.3 テストコードを準備する
 ・最初に、testディレクトリにeffects_test.rbとword_synth_test.rbを作成します。
 ・続いて、libディレクトリにeffects.rbとword_synth.rbを作成します。
+
+-- 10.4.4 リバースエフェクトを実装する
+今回は各エフェクトの実装とテストを行い、それからWordSynthクラスの実装とテストに進みます。ではまず、リバースエフェクトから作成してみましょう。
