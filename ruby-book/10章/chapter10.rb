@@ -157,6 +157,11 @@ module Effects
     end
   end
 end
+
 -- 10.4.2 テストコードも2つに分ける
 今回はWordSynthクラスとEffectsモジュールという2種類のクラス／モジュールが登場します。
 EffectsモジュールについてはEffectsTestで、WordSynthクラスについてはWordSynthTestで、それぞれテストコードを書くことにします。
+
+-- 10.4.3 テストコードを準備する
+・最初に、testディレクトリにeffects_test.rbとword_synth_test.rbを作成します。
+・続いて、libディレクトリにeffects.rbとword_synth.rbを作成します。
