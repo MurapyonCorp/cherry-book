@@ -145,3 +145,15 @@ aa_proc.lambda?
 aa_lambda = ->(a, b){a + b}
 aa_lambda.class
 aa_lambda.lambda?
+
+! 10.4 例題：ワードシンセサイザーの作成
+-- 10.4.1 エフェクトの実装方法を検討する
+module Effects
+  def self.reverse
+    # Procオブジェクト(ラムダ)をメソッドの戻り値にする
+    ->(words)do
+      # スペースで分解 ＞ 逆順に並び替え ＞ スペースで連結
+      words.split('').map(&:reverse).join('')
+    end
+  end
+end
