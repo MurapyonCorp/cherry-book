@@ -145,3 +145,35 @@ aa_proc.lambda?
 aa_lambda = ->(a, b){a + b}
 aa_lambda.class
 aa_lambda.lambda?
+
+! 10.4 例題：ワードシンセサイザーの作成
+-- 10.4.1 エフェクトの実装方法を検討する
+module Effects
+  def self.reverse
+    # Procオブジェクト(ラムダ)をメソッドの戻り値にする
+    ->(words)do
+      # スペースで分解 ＞ 逆順に並び替え ＞ スペースで連結
+      words.split('').map(&:reverse).join('')
+    end
+  end
+end
+
+-- 10.4.2 テストコードも2つに分ける
+今回はWordSynthクラスとEffectsモジュールという2種類のクラス／モジュールが登場します。
+EffectsモジュールについてはEffectsTestで、WordSynthクラスについてはWordSynthTestで、それぞれテストコードを書くことにします。
+
+-- 10.4.3 テストコードを準備する
+・最初に、testディレクトリにeffects_test.rbとword_synth_test.rbを作成します。
+・続いて、libディレクトリにeffects.rbとword_synth.rbを作成します。
+
+-- 10.4.4 リバースエフェクトを実装する
+今回は各エフェクトの実装とテストを行い、それからWordSynthクラスの実装とテストに進みます。ではまず、リバースエフェクトから作成してみましょう。
+
+-- 10.4.5 エコーエフェクトを実装する
+テストコードから実装しよう
+
+-- 10.4.6 ラウドエフェクトを実装する
+テストコードから実装しよう
+
+-- 10.4.7 WordSynthクラスの実装とテスト
+WordSynthクラスもテストコードから書いていきます。まずはエフェクトをまったく使わずにplayメソッドを呼ぶケースをテストしましょう。
