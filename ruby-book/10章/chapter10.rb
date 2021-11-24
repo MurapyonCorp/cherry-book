@@ -177,3 +177,56 @@ EffectsモジュールについてはEffectsTestで、WordSynthクラスにつ�
 
 -- 10.4.7 WordSynthクラスの実装とテスト
 WordSynthクラスもテストコードから書いていきます。まずはエフェクトをまったく使わずにplayメソッドを呼ぶケースをテストしましょう。
+
+! 10.5 Procオブジェクトについてもっと詳しく
+-- 10.5.1 Procオブジェクトを実行する様々な方法
+add_proc = Proc.new{|a, b| a + b}
+# callメソッドを使います。
+add_proc.call(10, 20)
+# yieldメソッドを使います。
+add_proc.yield(10, 20)
+# .()を使います。
+add_proc.(10, 20)
+# []を使います。
+add_proc[10, 20]
+
+# 少し変わっているが、===を使って呼び出す方法もある。
+add_proc === [10, 20]
+
+--　10.5.2 ＆とto_procメソッド
+split_proc = :split.to_proc
+split_proc.call('a-b-c-d e', '-', 3)
+
+-- 10.5.3 Procオブジェクトとクロージャ
+def generate_proc(array)
+  counter = 0
+  # Procオブジェクトをメソッドの戻り値とする
+  Proc.new do
+    # ローカル変数のcounterを加算する
+    counter += 10
+    # メソッド引数のarrayにcounterの値を追加する
+    array << counter
+  end
+end
+
+values = []
+sample_proc = generate_proc(values)
+sample_proc.call
+values
+
+-- 10.5.4 ややこしい2つ目のProc.newとラムダの違い
+def proc_return
+  # Proc.newでreturnを使う
+  f = Proc.new{|n| break n * 10}
+  ret = [1, 2, 3].map(&f)
+  "ret: #{ret}"
+end
+
+def lambda_return
+  # ラムダでreturnを使う
+  f = ->(n){break n * 10}
+  ret = [1, 2, 3].map(&f)
+  "ret: #{ret}"
+end
+proc_return
+lambda_return
