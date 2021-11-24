@@ -196,3 +196,20 @@ add_proc === [10, 20]
 --　10.5.2 ＆とto_procメソッド
 split_proc = :split.to_proc
 split_proc.call('a-b-c-d e', '-', 3)
+
+-- 10.5.3 Procオブジェクトとクロージャ
+def generate_proc(array)
+  counter = 0
+  # Procオブジェクトをメソッドの戻り値とする
+  Proc.new do
+    # ローカル変数のcounterを加算する
+    counter += 10
+    # メソッド引数のarrayにcounterの値を追加する
+    array << counter
+  end
+end
+
+values = []
+sample_proc = generate_proc(values)
+sample_proc.call
+values
