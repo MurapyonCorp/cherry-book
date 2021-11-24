@@ -192,3 +192,7 @@ add_proc[10, 20]
 
 # 少し変わっているが、===を使って呼び出す方法もある。
 add_proc === [10, 20]
+
+--　10.5.2 ＆とto_procメソッド
+split_proc = :split.to_proc
+split_proc.call('a-b-c-d e', '-', 3)
