@@ -177,3 +177,18 @@ EffectsモジュールについてはEffectsTestで、WordSynthクラスにつ�
 
 -- 10.4.7 WordSynthクラスの実装とテスト
 WordSynthクラスもテストコードから書いていきます。まずはエフェクトをまったく使わずにplayメソッドを呼ぶケースをテストしましょう。
+
+! 10.5 Procオブジェクトについてもっと詳しく
+-- 10.5.1 Procオブジェクトを実行する様々な方法
+add_proc = Proc.new{|a, b| a + b}
+# callメソッドを使います。
+add_proc.call(10, 20)
+# yieldメソッドを使います。
+add_proc.yield(10, 20)
+# .()を使います。
+add_proc.(10, 20)
+# []を使います。
+add_proc[10, 20]
+
+# 少し変わっているが、===を使って呼び出す方法もある。
+add_proc === [10, 20]
