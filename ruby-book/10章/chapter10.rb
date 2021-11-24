@@ -213,3 +213,20 @@ values = []
 sample_proc = generate_proc(values)
 sample_proc.call
 values
+
+-- 10.5.4 ややこしい2つ目のProc.newとラムダの違い
+def proc_return
+  # Proc.newでreturnを使う
+  f = Proc.new{|n| break n * 10}
+  ret = [1, 2, 3].map(&f)
+  "ret: #{ret}"
+end
+
+def lambda_return
+  # ラムダでreturnを使う
+  f = ->(n){break n * 10}
+  ret = [1, 2, 3].map(&f)
+  "ret: #{ret}"
+end
+proc_return
+lambda_return
