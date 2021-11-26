@@ -230,3 +230,8 @@ def lambda_return
 end
 proc_return
 lambda_return
+
+! 10.6 この章のまとめ
+以下のような内容を学習した。
+・ブロックを利用するメソッドの定義とyield
+・Procオブジェクト
